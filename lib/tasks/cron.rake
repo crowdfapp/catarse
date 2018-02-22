@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'zendesk_api'
 namespace :cron do
   desc 'Tasks that should run hourly'
   task hourly: %i[finish_projects second_slip_notification
@@ -10,7 +9,6 @@ namespace :cron do
   task daily: %i[notify_delivery_confirmation notify_owners_of_deadline notify_project_owner_about_new_confirmed_contributions notify_unanswered_surveys
                  notify_delivery_approaching
                  notify_late_delivery
-                 notify_sub_reports
                  verify_pagarme_transactions notify_new_follows
                  verify_pagarme_transfers verify_pagarme_user_transfers notify_pending_refunds request_direct_refund_for_failed_refund notify_expiring_rewards
                  update_fb_users]
@@ -21,51 +19,6 @@ namespace :cron do
       c.direct_refund
       puts "request refund for gateway_id -> #{c.gateway_id}"
     end
-  end
-
-  desc 'Update zendesk data'
-  task update_zendesk: :environment do
-
-    client = ZendeskAPI::Client.new do |config|
-      # Mandatory:
-
-      config.url = CatarseSettings[:zendesk_admin_url]
-
-      # Basic / Token Authentication
-      config.username = CatarseSettings[:zendesk_admin_username]
-
-
-      # Choose one of the following depending on your authentication choice
-      config.password = CatarseSettings[:zendesk_admin_password]
-
-      # Optional:
-
-      # Retry uses middleware to notify the user
-      # when hitting the rate limit, sleep automatically,
-      # then retry the request.
-      config.retry = true
-
-      # Logger prints to STDERR by default, to e.g. print to stdout:
-      require 'logger'
-      config.logger = Logger.new(STDOUT)
-
-      # Changes Faraday adapter
-      # config.adapter = :patron
-
-      # Merged with the default client options hash
-      # config.client_options = { :ssl => false }
-
-      # When getting the error 'hostname does not match the server certificate'
-      # use the API at https://yoursubdomain.zendesk.com/api/v2
-    end
-    User.where('created_at >= ?',Time.current - 1.year).each do |user|
-      zendesk_user = client.users.search(query: "email:" + user.email).first
-      if zendesk_user
-        zendesk_user.user_fields.externalid = user.id
-        zendesk_user.save!
-      end
-    end
-
   end
 
   desc 'Notify about approaching deliveries'
@@ -187,16 +140,6 @@ namespace :cron do
     #                        contribution.user)
     #  end
     #end
-  end
-
-  desc 'send subscription reports'
-  task notify_sub_reports: [:environment] do
-    SubscriptionProject.with_state(:online).find_each do |project| 
-      transitions = project.subscription_transitions.where("common_schema.subscription_status_transitions.created_at between now() - '1 day'::interval and now()")
-      if transitions.count > 0
-        project.notify(:subscription_report, project.user)
-      end
-    end
   end
 
   desc 'Update all fb users'

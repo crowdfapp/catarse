@@ -83,10 +83,8 @@ Catarse::Application.routes.draw do
       end
     end
     resources :projects, only: %i[create update edit new show] do
-      get 'subscriptions/:any', to: 'projects#show', on: :member
       resources :accounts, only: %i[create update]
       resources :posts, controller: 'projects/posts', only: %i[destroy show create]
-      resources :goals
       resources :rewards do
         member do
           get :toggle_survey_finish
@@ -118,10 +116,6 @@ Catarse::Application.routes.draw do
         get 'posts'
         get 'surveys'
         get 'contributions_report'
-        get 'subscriptions_report'
-        get 'subscriptions_report_download'
-        get 'subscriptions_report_for_project_owners'
-        get 'subscriptions_monthly_report_for_project_owners'
         get 'download_reports'
         put 'pay'
         get 'embed'
@@ -159,16 +153,14 @@ Catarse::Application.routes.draw do
     get '/terms-of-use' => 'high_voltage/pages#show', id: 'terms_of_use'
     get '/privacy-policy' => 'high_voltage/pages#show', id: 'privacy_policy'
     get '/start' => 'high_voltage/pages#show', id: 'start'
-    get '/start-sub' => 'high_voltage/pages#show', id: 'start_sub'
     get '/jobs' => 'high_voltage/pages#show', id: 'jobs'
     get '/hello' => redirect('/start')
-    get '/press' => redirect('https://crowdfunding.catarse.me/imprensa')
-    get '/assets' => redirect('https://crowdfunding.catarse.me/assets')
+    get '/press' => 'high_voltage/pages#show', id: 'press'
+    get '/assets' => 'high_voltage/pages#show', id: 'assets'
     get '/guides' => redirect('http://fazum.catarse.me/guia-financiamento-coletivo')
     get '/new-admin' => 'high_voltage/pages#show', id: 'new_admin'
     get '/explore' => 'high_voltage/pages#show', id: 'explore'
-    get '/team' => redirect('https://crowdfunding.catarse.me/nosso-time')
-    get '/about' => redirect('https://crowdfunding.catarse.me/quem-somos')
+    get '/team' => 'high_voltage/pages#show', id: 'team'
     get '/flex' => redirect('http://crowdfunding.catarse.me')
     get '/projects_dashboard' => 'high_voltage/pages#show', id: 'projects_dashboard'
 
@@ -214,11 +206,7 @@ Catarse::Application.routes.draw do
       end
     end
 
-    resource :api_token, only: [:show] do
-      collection do
-        get :common
-      end
-    end
+    resource :api_token, only: [:show]
 
     get '/:permalink' => 'projects#show', as: :project_by_slug
   end

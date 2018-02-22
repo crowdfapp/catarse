@@ -260,10 +260,6 @@ a:hover {
   height: 110px;
 }
 
-.text-field.height-supermini {
-  height: 32px;
-}
-
 .field-label {
   min-height: 20px;
   margin-bottom: 5px;
@@ -1094,7 +1090,6 @@ a:hover {
   padding: 18px;
   border: 1px solid #ddd;
   background-color: #fff;
-  box-shadow: 1px 1px 0 0 rgba(0, 0, 0, .09);
 }
 
 .card.medium {
@@ -3253,11 +3248,6 @@ a:hover {
   box-shadow: 1px 1px 49px 0 rgba(63, 71, 82, .29);
 }
 
-.modal-dialog-inner.modal-dialog-mini {
-  width: 540px;
-  height: 200px;
-}
-
 .modal-dialog-content {
   height: 70%;
   padding-top: 35px;
@@ -3308,7 +3298,7 @@ a:hover {
 }
 
 .project-stats-inner.dark {
-  background-color: #161b22;
+  background-color: #3f4752;
   color: #fff;
 }
 
@@ -4560,10 +4550,6 @@ html.w-mod-js *[data-ix="display-0-on-load"] {
     height: 100%;
   }
   .modal-dialog-inner.modal-dialog-small {
-    width: auto;
-    height: auto;
-  }
-   .modal-dialog-inner.modal-dialog-mini {
     width: auto;
     height: auto;
   }

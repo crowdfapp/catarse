@@ -2,13 +2,13 @@
 //= require jquery
 //= require select
 //= require underscore/underscore-min.js
-//= require liquidjs/dist/liquid.min.js
 //= require mithril-postgrest
 //= require moment/min/moment.min.js
 //= require lib/replace-diacritics
 //= require chart.js/Chart.min.js
 //= require i18n/translations
 //= require ../analytics
+//= require api/init
 //= require catarse.js/dist/catarse.js
 //= require_self
 
@@ -46,9 +46,7 @@
     m.route(adminRoot, '/', {
         '/': adminWrap(c.root.AdminContributions, {root: adminRoot, menuTransparency: false, hideFooter: true}),
         '/users': adminWrap(c.root.AdminUsers, { menuTransparency: false, hideFooter: true }),
-        '/subscriptions': adminWrap(c.root.AdminSubscriptions, { menuTransparency: false, hideFooter: true }),
         '/projects': adminWrap(c.root.AdminProjects, { menuTransparency: false, hideFooter: true }),
-        '/notifications': adminWrap(c.root.AdminNotifications, { menuTransparency: false, hideFooter: true }),
         '/balance-transfers': adminWrap(c.root.AdminBalanceTranfers, { menuTransparency: false, hideFooter: true })
     });
   }
@@ -69,7 +67,6 @@
             }
             var parameters = app.getAttribute('data-parameters') ? JSON.parse(app.getAttribute('data-parameters')) : {};
             var attr = customAttr,
-                postParam = m.route.param('post_id') || parameters.post_id,
                 projectParam = m.route.param('project_id') || parameters.project_id,
                 projectUserIdParam = m.route.param('project_user_id') || parameters.user_id || parameters.project_user_id,
                 userParam = m.route.param('user_id') || app.getAttribute('data-userid') || parameters.user_id,
@@ -81,10 +78,6 @@
             var addToAttr = function(newAttr) {
                 attr = _.extend({}, newAttr, attr);
             };
-            
-            if(postParam) {
-              addToAttr({post_id: postParam});
-            }
 
             if(projectParam) {
                 addToAttr({project_id: projectParam});
@@ -150,18 +143,11 @@
           '/': wrap(( isUserProfile ? c.root.UsersShow : c.root.ProjectsHome), {menuTransparency: true, footerBig: true, absoluteHome: isUserProfile}),
           '/explore': wrap(c.root.ProjectsExplore, {menuTransparency: true, footerBig: true}),
           '/start': wrap(c.root.Start, {menuTransparency: true, footerBig: true}),
-          '/start-sub': wrap(c.root.SubProjectNew, {menuTransparency: false }),
           '/projects/:project_id/contributions/new': wrap(c.root.ProjectsContribution),
           '/projects/:project_id/contributions/fallback_create': wrap(c.root.ProjectsContribution),
           '/projects/:project_id/contributions/:contribution_id/edit': wrap(c.root.ProjectsPayment, {menuShort: true}),
-          '/projects/:project_id/subscriptions/start': wrap(c.root.ProjectsSubscriptionContribution, {menuShort: true, footerBig: false}),
-          '/projects/:project_id/subscriptions/checkout': wrap(c.root.ProjectsSubscriptionCheckout, {menuShort: true, footerBig: false}),
-          '/projects/:project_id/subscriptions/thank_you': wrap(c.root.ProjectsSubscriptionThankYou, {menuShort: true, footerBig: false}),
           '/pt/projects/:project_id/contributions/new': wrap(c.root.ProjectsContribution),
           '/pt/projects/:project_id/contributions/:contribution_id/edit': wrap(c.root.ProjectsPayment, {menuShort: true}),
-          '/pt/projects/:project_id/subscriptions/start': wrap(c.root.ProjectsSubscriptionContribution, {menuShort: true, footerBig: false}),
-          '/pt/projects/:project_id/subscriptions/checkout': wrap(c.root.ProjectsSubscriptionCheckout, {menuShort: true, footerBig: false}),
-          '/pt/projects/subscriptions/thank_you': wrap(c.root.ProjectsSubscriptionThankYou, {menuShort: true, footerBig: false}),
           '/pt': wrap(c.root.ProjectsHome, {menuTransparency: true, footerBig: true}),
           '/pt/flexible_projects': wrap(c.root.ProjectsHome, {menuTransparency: true, footerBig: true}),
           '/pt/projects': wrap(c.root.ProjectsHome, {menuTransparency: true, footerBig: true}),
@@ -175,15 +161,9 @@
           '/pt/projects/:project_id/insights': wrap(c.root.Insights, {menuTransparency: false, footerBig: false}),
           '/projects/:project_id/contributions_report': wrap(c.root.ProjectsContributionReport, {menuTransparency: false, footerBig: false}),
           '/pt/projects/:project_id/contributions_report': wrap(c.root.ProjectsContributionReport, {menuTransparency: false, footerBig: false}),
-          '/projects/:project_id/subscriptions_report': wrap(c.root.ProjectsSubscriptionReport, {menuTransparency: false, footerBig: false}),
-          '/pt/projects/:project_id/subscriptions_report': wrap(c.root.ProjectsSubscriptionReport, {menuTransparency: false, footerBig: false}),
-          '/projects/:project_id/subscriptions_report_download': wrap(c.root.ProjectsSubscriptionReportDownload, {menuTransparency: false, footerBig: false}),
-          '/pt/projects/:project_id/subscriptions_report_download': wrap(c.root.ProjectsSubscriptionReportDownload, {menuTransparency: false, footerBig: false}),
-          '/projects/:project_id/surveys': wrap(c.root.Surveys, {menuTransparency: false, footerBig: false, menuShort: true}),
           '/projects/:project_id/posts': wrap(c.root.Posts, {menuTransparency: false, footerBig: false}),
-          '/projects/:project_id/posts/:post_id': wrap(c.root.ProjectsShow, {menuTransparency: false, footerBig: true}),
+          '/projects/:project_id/surveys': wrap(c.root.Surveys, {menuTransparency: false, footerBig: false, menuShort: true}),
           '/pt/projects/:project_id/posts': wrap(c.root.Posts, {menuTransparency: false, footerBig: false}),
-          '/pt/projects/:project_id/posts/:post_id': wrap(c.root.ProjectsShow, {menuTransparency: false, footerBig: true}),
           '/projects/:project_id': wrap(c.root.ProjectsShow, {menuTransparency: false, footerBig: false}),
           '/users/:user_id': wrap(c.root.UsersShow, {menuTransparency: true, footerBig: false}),
           '/pt/users/:user_id': wrap(c.root.UsersShow, {menuTransparency: true, footerBig: false}),

@@ -20,19 +20,6 @@ def generate_psql_c(view)
 }
 end
 
-def generate_psql_function(function)
-  %{ echo "DO language plpgsql \\$\\$BEGIN
-      RAISE NOTICE 'begin updating';
-      IF NOT EXISTS (SELECT true FROM pg_stat_activity WHERE pg_backend_pid() <> pid AND query ~* '#{function}') THEN
-        RAISE NOTICE 'refreshing view';
-            select #{function}();
-        RAISE NOTICE 'view refreshed';
-      END IF;
-      END\\$\\$;" | psql -U #{ENV['DB_USER']} -h #{ENV['DB_HOST']} -d #{ENV['DB_NAME']}
-  }
-end
-
-
 %w[
   "1".finished_projects
   "1".statistics
@@ -41,6 +28,14 @@ end
   "1".statistics_publicacoes
 ].each do |v|
   every 1.hour do
+    command generate_psql_c(v)
+  end
+end
+
+%w[
+  "1".project_visitors_per_day
+].each do |v|
+  every 1.day, at: '11:59 pm' do
     command generate_psql_c(v)
   end
 end
@@ -69,36 +64,23 @@ end
 end
 
 %w[
+  public.moments_navigations
   public.moments_project_start
   public.moments_project_start_inferuser
   stats.project_points
   stats.aarrr_realizador_projetos
+  stats.growth_project_views
+  stats.growth_contribution_views
+  stats.growth_contribution_origins
+  stats.growth_project_contribs_per_week_mat
   stats.financeiro_control_panel_simplificado
   stats.financeiro_control_panel_simplificado_all_projects
   stats.financeiro_int_payments_2016_simplificado
   stats.financeiro_payment_refund_error_distribution
   stats.financeiro_payments_paid_refunded
   stats.financeiro_status_pagarme_catarse
-  stats.pagarme__payments
 ].each do |v|
   every 1.day, at: '00:30 am' do
     command generate_psql_c(v)
-  end
-end
-
-
-%w[
-  public.project_visitors_per_day_tbl_refresh
-].each do |v|
-  every 1.hour do
-    command generate_psql_function(v)
-  end
-end
-
-%w[
-  stats.growth_refresh
-].each do |v|
-  every 1.day, at: '00:30 am' do
-    command generate_psql_function(v)
   end
 end

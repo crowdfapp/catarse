@@ -7,7 +7,6 @@ gem 'rails', '~> 4.2.10'
 gem 'protected_attributes'
 gem 'rails-observers'
 gem 'rb-readline'
-gem 'ruby-progressbar'
 
 gem 'sidekiq',  '~> 4.0.1'
 
@@ -58,7 +57,7 @@ gem 'high_voltage'
 
 # Authentication and Authorization
 gem 'simple_token_authentication', '~> 1.0' # see semver.org
-gem 'omniauth', '~> 1.3.2'
+gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'koala'
 gem 'devise', '3.5.10'
@@ -68,7 +67,6 @@ gem 'json_web_token'
 # Email marketing
 gem 'gridhook'
 gem 'sendgrid-ruby'
-gem 'zendesk_api'
 
 # HTML manipulation and formatting
 gem 'simple_form'

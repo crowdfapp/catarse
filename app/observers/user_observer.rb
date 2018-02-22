@@ -32,7 +32,5 @@ class UserObserver < ActiveRecord::Observer
     if user.mail_marketing_users.unsynced.present?
       SendgridSyncWorker.perform_async(user.id)
     end
-
-    user.index_on_common
   end
 end

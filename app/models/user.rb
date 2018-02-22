@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   include I18n::Alchemy
   acts_as_token_authenticatable
   include User::OmniauthHandler
-  include Shared::CommonWrapper
   has_notifications
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -111,14 +110,6 @@ class User < ActiveRecord::Base
     where('id IN (SELECT user_id FROM contributions WHERE contributions.was_confirmed AND project_id = ?)', project_id)
   }
 
-  scope :who_subscribed_to_project, ->(project_id) {
-    where("common_id IN (SELECT user_id FROM common_schema.subscriptions WHERE status = 'active' AND project_id = ?)", project_id)
-  }
-
-  scope :who_subscribed_reward, ->(reward_id) {
-    where("common_id IN (SELECT user_id FROM common_schema.subscriptions WHERE status = 'active' AND reward_id = ?)", reward_id)
-  }
-
   scope :who_chose_reward, ->(reward_id) {
     where('id IN (SELECT user_id FROM contributions WHERE contributions.was_confirmed AND reward_id = ?)', reward_id)
   }
@@ -140,16 +131,14 @@ class User < ActiveRecord::Base
             ))")
   }
 
-  scope :contributed_to_project, ->(project_id) {
+  scope :subscribed_to_project, ->(project_id) {
     who_contributed_project(project_id)
       .where('id NOT IN (SELECT user_id FROM unsubscribes WHERE project_id = ?)', project_id)
   }
 
-  scope :subscribed_to_project, ->(project_id) {
-    who_subscribed_to_project(project_id)
-      .where('id NOT IN (SELECT user_id FROM unsubscribes WHERE project_id = (select id from projects where common_id = ? limit 1))', project_id)
-  }
-
+  # FIXME: very slow query
+  # This query is executed once a day in worst case and taks 1/2 second to excute
+  # LGTM
   scope :to_send_category_notification, ->(category_id) {
     where("NOT EXISTS (
           select true from category_notifications n
@@ -310,7 +299,6 @@ class User < ActiveRecord::Base
     {
       id: id,
       user_id: id,
-      common_id: common_id,
       public_name: public_name,
       email: email,
       name: name,
@@ -431,54 +419,5 @@ class User < ActiveRecord::Base
 
   def total_balance
     @total_balance ||= balance_transactions.sum(:amount).to_f
-  end
-
-  def common_index
-    id_hash = if common_id.present?
-                {id: common_id }
-              else
-                {}
-              end
-
-    phone_matches = phone_number.
-      gsub(/[\s,-]/, '').match(/\((.*)\)(\d+)/) rescue nil
-
-    {
-      external_id: id,
-      name: name,
-      email: email,
-      password: encrypted_password,
-      password_encrypted: true,
-      document_number: cpf,
-      document_type: (account_type == 'pf' ? "CPF" : "CNPJ"),
-      born_at: birth_date,
-      address: {
-        street: address_street,
-        street_number: address_number,
-        neighborhood: address_neighbourhood,
-        zipcode: address_zip_code,
-        country: address.try(:country).try(:name),
-        state: address_state,
-        city: address_city,
-        complementary: address_complement
-      },
-      phone: {
-        ddi: "55",
-        ddd: phone_matches.try(:[], 1),
-        number: phone_matches.try(:[], 2)
-      },
-      bank_account: {
-        bank_code: bank_account.try(:bank_code),
-        account: bank_account.try(:account),
-        account_digit: bank_account.try(:account_digit),
-        agency: bank_account.try(:agency),
-        agency_digit: bank_account.try(:agency_digit)
-      },
-      created_at: created_at
-    }.merge(id_hash)
-  end
-
-  def index_on_common
-    common_wrapper.index_user(self) if common_wrapper
   end
 end

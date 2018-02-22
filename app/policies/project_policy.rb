@@ -40,7 +40,6 @@ class ProjectPolicy < ApplicationPolicy
       p_attr << budget_attributes
       p_attr << posts_attributes
       p_attr << reward_attributes
-      p_attr << goal_attributes
 
       p_attr.flatten
 
@@ -57,7 +56,7 @@ class ProjectPolicy < ApplicationPolicy
 
       p_attr
     else
-      [:about_html, :online_days, :video_url, :cover_image, :uploaded_image, :headline, :budget, :city_id, :city,
+      [:about_html, :online_days, :video_url, :uploaded_image, :headline, :budget, :city_id, :city,
        user_attributes, posts_attributes, budget_attributes, reward_attributes]
     end
   end
@@ -81,12 +80,6 @@ class ProjectPolicy < ApplicationPolicy
 
     attrs[:rewards_attributes].delete(:deliver_at) if record.waiting_funds? || record.failed? || record.successful?
 
-    attrs
-  end
-
-  def goal_attributes
-    attrs = { goals_attributes: [:_destroy, :id, :value,
-                                   :description, :title ]}
     attrs
   end
 end

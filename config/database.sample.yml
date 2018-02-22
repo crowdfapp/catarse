@@ -15,7 +15,7 @@ development:
   database: catarse_development
   pool: 5
   username: postgres # <== Change me!!
-  password: password # <== Change me too!
+  password:
 
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -41,8 +41,8 @@ test:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  port: 5432
+  port: 5433
   database: catarse_test
   pool: 5
   username: postgres # <== Change me!
-  password: password # <== Same here!
+  password:

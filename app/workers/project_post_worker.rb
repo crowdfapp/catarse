@@ -8,11 +8,7 @@ class ProjectPostWorker
     post = ProjectPost.find post_id
     recipients = case post.recipients
                  when 'reward'
-                   if post.project.is_sub?
-                     post.project.subscribed_users.who_subscribed_reward(Reward.find(post.reward_id).common_id)
-                   else
-                     post.project.subscribed_users.who_chose_reward(post.reward_id)
-                   end
+                   post.project.subscribed_users.who_chose_reward(post.reward_id)
                  else
                    post.project.subscribed_users
     end

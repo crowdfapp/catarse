@@ -5,7 +5,6 @@ class Reward < ActiveRecord::Base
   include I18n::Alchemy
   include RankedModel
   include ERB::Util
-  include Shared::CommonWrapper
 
   before_destroy :check_if_is_destroyable
 
@@ -19,8 +18,7 @@ class Reward < ActiveRecord::Base
   ranks :row_order, with_same: :project_id
 
   validates_presence_of :minimum_value, :description, :deliver_at, :shipping_options # , :days_to_delivery
-  validates_numericality_of :minimum_value, greater_than_or_equal_to: 10.00, message: 'Valor deve ser maior ou igual a R$ 10', if: ->() {!project.is_sub?}
-  validates_numericality_of :minimum_value, greater_than_or_equal_to: 5.00, message: 'Valor deve ser maior ou igual a R$ 5', if: ->() {project.is_sub?}
+  validates_numericality_of :minimum_value, greater_than_or_equal_to: 10.00, message: 'Valor deve ser maior ou igual a R$ 10'
   validates_numericality_of :maximum_contributions, only_integer: true, greater_than: 0, allow_nil: true
   scope :remaining, -> {
     where("
@@ -45,7 +43,6 @@ class Reward < ActiveRecord::Base
 
   before_save :log_changes
   after_save :expires_project_cache
-  after_save :index_on_common
 
   def log_changes
     self.last_changes = changes.to_json
@@ -98,28 +95,6 @@ class Reward < ActiveRecord::Base
 
   def expires_project_cache
     project.expires_fragments 'project-rewards'
-  end
-
-  def common_index
-    id_hash = common_id.present? ? {id: common_id} : {}
-
-    {
-      external_id: id,
-      project_id: project.common_id,
-      current_ip: project.user.current_sign_in_ip,
-      minimum_value: (minimum_value*100),
-      maximum_contributions: maximum_contributions || 0,
-      shipping_options: shipping_options,
-      deliver_at: deliver_at.try(:strftime, "%FT%T"),
-      row_order: row_order,
-      title: title,
-      description: description,
-      created_at: created_at.strftime("%FT%T")
-    }.merge!(id_hash)
-  end
-
-  def index_on_common
-    common_wrapper.index_reward(self) if common_wrapper
   end
 
   private

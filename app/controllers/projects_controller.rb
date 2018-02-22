@@ -33,6 +33,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new user: current_user
     authorize @project
+    @project.rewards.build
   end
 
   def create
@@ -44,7 +45,7 @@ class ProjectsController < ApplicationController
     )
     authorize @project
     if @project.save
-      redirect_after_create(@project)
+      redirect_to insights_project_path(@project, locale: '')
     else
       render :new
     end
@@ -96,48 +97,16 @@ class ProjectsController < ApplicationController
     authorize resource, :update?
   end
 
-  def subscriptions_monthly_report_for_project_owners
-    authorize resource, :update?
-    report = SubscriptionMonthlyReportForProjectOwner.project_id(resource.common_id).to_csv
-    respond_to do |format|
-      format.csv { send_data  report}
-      format.xls do
-        send_data Excelinator.csv_to_xls(report)
-      end
-    end
-  end
-
-  def subscriptions_report_for_project_owners
-    authorize resource, :update?
-    report = SubscriptionReportForProjectOwner.project_id(resource.common_id).to_csv
-    respond_to do |format|
-      format.csv { send_data  report}
-      format.xls do
-        send_data Excelinator.csv_to_xls(report)
-      end
-    end
-  end
-
-  def subscriptions_report
-    authorize resource, :update?
-  end
-
-  def subscriptions_report_download
-    authorize resource, :update?
-  end
-
   def upload_image
     authorize resource, :update?
-    params[:project] = {}
-
-    params[:project][:uploaded_image] = params[:uploaded_image] if !params[:uploaded_image].nil?
-    params[:project][:cover_image] = params[:cover_image] if !params[:cover_image].nil?
+    params[:project] = {
+      uploaded_image: params[:uploaded_image]
+    }
 
     if resource.update permitted_params
       resource.reload
       render status: 200, json: {
-        uploaded_image: resource.uploaded_image.try(:url, :project_thumb),
-        cover_image: resource.cover_image.try(:url, :base)
+        uploaded_image: resource.uploaded_image.url(:project_thumb)
       }
     else
       render status: 400, json: { errors: resource.errors.full_messages, errors_json: resource.errors.to_json }
@@ -291,13 +260,5 @@ class ProjectsController < ApplicationController
     url = project_by_slug_url(resource.permalink, protocol: 'http', subdomain: 'www').split('/')
     url.delete_at(3) # remove language from url
     url.join('/')
-  end
-
-  def redirect_after_create(project)
-    if project.is_sub?
-      redirect_to edit_project_path(project, locale: '', anchor: 'start')
-    else
-      redirect_to insights_project_path(project, locale: '')
-    end
   end
 end

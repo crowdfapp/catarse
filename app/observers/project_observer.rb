@@ -19,8 +19,6 @@ class ProjectObserver < ActiveRecord::Observer
     if project.try(:video_url_changed?)
       ProjectDownloaderWorker.perform_async(project.id)
     end
-
-    project.index_on_common
   end
 
   def from_waiting_funds_to_successful(project)
