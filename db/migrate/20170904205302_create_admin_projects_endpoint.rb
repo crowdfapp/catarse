@@ -52,7 +52,7 @@ class CreateAdminProjectsEndpoint < ActiveRecord::Migration
      LEFT JOIN categories c on c.id = p.category_id
      where p.state <> 'deleted';
 
-    grant all on "1".admin_projects to admin;
+    grant all on "1".admin_projects to admins;
     SQL
   end
 end

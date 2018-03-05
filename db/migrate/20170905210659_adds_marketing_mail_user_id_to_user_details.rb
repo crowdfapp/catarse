@@ -10,7 +10,7 @@ CREATE OR REPLACE VIEW "1"."mail_marketing_lists" AS
     mml.list_id
    FROM mail_marketing_lists mml
   WHERE mml.disabled_at IS NULL;
-grant select on "1".mail_marketing_lists to admin, web_user, anonymous;
+grant select on "1".mail_marketing_lists to admins, web_user, anonymous;
 
 drop view "1".user_details;
 
@@ -78,7 +78,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
             WHEN ((u.deactivated_at IS NOT NULL) AND (NOT is_owner_or_admin(u.id))) THEN false
             ELSE u.subscribed_to_friends_contributions
         END AS subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink,
         CASE
             WHEN is_owner_or_admin(u.id) THEN email_active(u.*)
@@ -101,7 +101,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
             WHEN is_owner_or_admin(u.id) THEN u.account_type
             ELSE NULL::text
         END AS account_type,
-    ("current_user"() = 'admin'::name) AS is_admin_role,
+    ("current_user"() = 'admins'::name) AS is_admin_role,
     (case when is_owner_or_admin(u.id) then json_agg(json_build_object('user_marketing_list_id', mmu.id, 'marketing_list', row_to_json(mml.*))) else null::json end) as mail_marketing_lists
    FROM users u
      LEFT JOIN "1".user_totals ut ON ut.user_id = u.id
@@ -110,7 +110,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
      LEFT JOIN public.mail_marketing_lists mml on mml.id = mmu.mail_marketing_list_id
     group by u.id, add.*, ut.total_contributed_projects, ut.total_published_projects;
 
-grant select on "1".user_details to admin, web_user, anonymous;
+grant select on "1".user_details to admins, web_user, anonymous;
 SQL
   end
 
@@ -125,7 +125,7 @@ CREATE OR REPLACE VIEW "1"."mail_marketing_lists" AS
     mml.list_id
    FROM mail_marketing_lists mml
   WHERE mml.disabled_at IS NULL;
-grant select on "1".mail_marketing_lists to admin, web_user, anonymous;
+grant select on "1".mail_marketing_lists to admins, web_user, anonymous;
 
 drop view "1".user_details;
 
@@ -193,7 +193,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
             WHEN ((u.deactivated_at IS NOT NULL) AND (NOT is_owner_or_admin(u.id))) THEN false
             ELSE u.subscribed_to_friends_contributions
         END AS subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink,
         CASE
             WHEN is_owner_or_admin(u.id) THEN email_active(u.*)
@@ -216,7 +216,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
             WHEN is_owner_or_admin(u.id) THEN u.account_type
             ELSE NULL::text
         END AS account_type,
-    ("current_user"() = 'admin'::name) AS is_admin_role,
+    ("current_user"() = 'admins'::name) AS is_admin_role,
     (case when is_owner_or_admin(u.id) then json_agg(row_to_json(mml.*)) else null::json end) as mail_marketing_lists
    FROM users u
      LEFT JOIN "1".user_totals ut ON ut.user_id = u.id
@@ -225,7 +225,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
      LEFT JOIN public.mail_marketing_lists mml on mml.id = mmu.mail_marketing_list_id
     group by u.id, add.*, ut.total_contributed_projects, ut.total_published_projects;
 
-grant select on "1".user_details to admin, web_user, anonymous;
+grant select on "1".user_details to admins, web_user, anonymous;
 SQL
   end
 end

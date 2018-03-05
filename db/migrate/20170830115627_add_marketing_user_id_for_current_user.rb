@@ -14,7 +14,7 @@ SELECT mml.id,
     LEFT JOIN mail_marketing_users mmu on mmu.mail_marketing_list_id = mml.id
         AND is_owner_or_admin(mmu.user_id)
   WHERE (mml.disabled_at IS NULL);
-grant select on "1".mail_marketing_lists to anonymous, web_user, admin;
+grant select on "1".mail_marketing_lists to anonymous, web_user, admins;
 
 }
   end
@@ -36,7 +36,7 @@ CREATE OR REPLACE VIEW "1"."mail_marketing_lists" AS
         END AS in_list
    FROM mail_marketing_lists mml
   WHERE (mml.disabled_at IS NULL);
-grant select on "1".mail_marketing_lists to admin, web_user, anonymous;
+grant select on "1".mail_marketing_lists to admins, web_user, anonymous;
 }
   end
 end

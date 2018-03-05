@@ -18,7 +18,7 @@ create or replace view "1".mail_marketing_lists as
             ), false) end) as in_list
     from mail_marketing_lists mml
         where mml.disabled_at is null;
-grant select on "1".mail_marketing_lists to anonymous, admin, web_user;
+grant select on "1".mail_marketing_lists to anonymous, admins, web_user;
 }
   end
 
@@ -36,7 +36,7 @@ create or replace view "1".mail_marketing_lists as
     from public.mail_marketing_users mmu
         join public.mail_marketing_lists mml on mml.id = mmu.mail_marketing_list_id
     where public.is_owner_or_admin(mmu.user_id) and mml.disabled_at is null;
-grant select on "1".mail_marketing_lists to anonymous, admin, web_user;
+grant select on "1".mail_marketing_lists to anonymous, admins, web_user;
 }
   end
 end
