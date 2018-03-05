@@ -10,14 +10,6 @@ class CreateAdminRole < ActiveRecord::Migration
     END
     $body$;
 
-    DO
-      $body$
-    BEGIN
-      IF NOT EXISTS (SELECT * FROM pg_catalog.pg_roles WHERE rolname = 'admin') THEN
-        CREATE ROLE admin NOLOGIN;
-      END IF;
-    END
-    $body$;
     -- This script assumes a role postgrest and a role anonymous already created
     GRANT usage ON SCHEMA postgrest TO admin;
     GRANT usage ON SCHEMA "1" TO admin;
