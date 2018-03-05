@@ -9,6 +9,9 @@ class CreateAdminRole < ActiveRecord::Migration
       END IF;
     END
     $body$;
+
+    DO
+      $body$
     BEGIN
       IF NOT EXISTS (SELECT * FROM pg_catalog.pg_roles WHERE rolname = 'admins') THEN
         CREATE ROLE admins NOLOGIN;
