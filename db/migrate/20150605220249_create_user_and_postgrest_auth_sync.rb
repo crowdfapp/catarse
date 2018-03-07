@@ -32,7 +32,7 @@ class CreateUserAndPostgrestAuthSync < ActiveRecord::Migration
     FOR EACH ROW
     EXECUTE PROCEDURE postgrest.create_api_user();
 
-    CREATE TRIGGER update_api_user AFTER UPDATE OF id, admins, authentication_token 
+    CREATE TRIGGER update_api_user AFTER UPDATE OF id, admin, authentication_token 
     ON public.users
     FOR EACH ROW
     EXECUTE PROCEDURE postgrest.update_api_user();
