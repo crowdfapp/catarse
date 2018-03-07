@@ -10,8 +10,8 @@ class CreateShippingFeesEndpoint < ActiveRecord::Migration
     from shipping_fees sf;
 
 
-    grant all on shipping_fees to admin, web_user, anonymous;
-    grant select, insert, update on "1".shipping_fees to admin, web_user;
+    grant all on shipping_fees to admins, web_user, anonymous;
+    grant select, insert, update on "1".shipping_fees to admins, web_user;
     grant select on "1".shipping_fees to web_user, anonymous;
 
     SQL

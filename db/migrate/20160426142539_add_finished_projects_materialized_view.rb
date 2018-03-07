@@ -40,7 +40,7 @@ CREATE MATERIALIZED VIEW "1".finished_projects AS
             AND pt.project_id = p.id))
   WITH NO DATA;
 
-GRANT SELECT ON "1".finished_projects TO anonymous, web_user, admin;
+GRANT SELECT ON "1".finished_projects TO anonymous, web_user, admins;
 CREATE UNIQUE INDEX finished_projects_idx ON "1".finished_projects(project_id);
     }
   end

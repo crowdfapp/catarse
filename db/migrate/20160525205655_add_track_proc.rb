@@ -13,9 +13,9 @@ CREATE OR REPLACE FUNCTION "1".track(event jsonb) RETURNS public.moments
         END;
     $$;
 
-GRANT EXECUTE ON FUNCTION "1".track(event jsonb) TO anonymous, web_user, admin;
-GRANT INSERT, SELECT ON public.moments TO anonymous, web_user, admin;
-GRANT USAGE ON SEQUENCE moments_id_seq TO anonymous, web_user, admin;
+GRANT EXECUTE ON FUNCTION "1".track(event jsonb) TO anonymous, web_user, admins;
+GRANT INSERT, SELECT ON public.moments TO anonymous, web_user, admins;
+GRANT USAGE ON SEQUENCE moments_id_seq TO anonymous, web_user, admins;
 
 ALTER TABLE public.moments
     ADD CONSTRAINT action_not_null check((data->>'action')::text is not null);

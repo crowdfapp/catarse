@@ -28,8 +28,8 @@ create or replace view "1".user_friends as
     where public.is_owner_or_admin(uf.user_id) and f.deactivated_at is null;
 
 
-GRANT SELECT ON "1".user_friends TO admin, web_user;
-GRANT SELECT ON public.user_follows TO admin, web_user;
+GRANT SELECT ON "1".user_friends TO admins, web_user;
+GRANT SELECT ON public.user_follows TO admins, web_user;
     }
   end
 

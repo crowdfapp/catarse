@@ -44,7 +44,7 @@ class CreateUserDetails < ActiveRecord::Migration
            LEFT JOIN "1".user_totals ut ON ut.user_id = u.id
         WHERE u.admin
         ORDER BY u.name;
-      grant select on "1".team_members to admin;
+      grant select on "1".team_members to admins;
       grant select on "1".team_members to web_user;
       grant select on "1".team_members to anonymous;
 
@@ -80,7 +80,7 @@ class CreateUserDetails < ActiveRecord::Migration
           ) as links
         from users u
         left join "1".user_totals ut on ut.user_id = u.id;
-      grant select on "1".user_details to admin;
+      grant select on "1".user_details to admins;
       grant select on "1".user_details to web_user;
       grant select on "1".user_details to anonymous;
     SQL
@@ -124,7 +124,7 @@ class CreateUserDetails < ActiveRecord::Migration
            LEFT JOIN user_totals ut ON ut.user_id = u.id
         WHERE u.admin
         ORDER BY u.name;
-      grant select on "1".team_members to admin;
+      grant select on "1".team_members to admins;
       grant select on "1".team_members to web_user;
       grant select on "1".team_members to anonymous;
 
@@ -151,7 +151,7 @@ class CreateUserDetails < ActiveRecord::Migration
         left join user_totals ut on ut.user_id = u.id
         left join projects p on p.user_id = u.id
         group by u.id, ut.total_contributed_projects;
-      grant select on "1".user_details to admin;
+      grant select on "1".user_details to admins;
       grant select on "1".user_details to web_user;
       grant select on "1".user_details to anonymous;
 

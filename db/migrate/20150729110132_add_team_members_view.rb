@@ -41,14 +41,14 @@ class AddTeamMembersView < ActiveRecord::Migration
         order by u.name asc
       );
 
-      GRANT SELECT on "1".team_members to admin;
+      GRANT SELECT on "1".team_members to admins;
       GRANT SELECT on "1".team_members to web_user;
       GRANT SELECT on "1".team_members to anonymous;
 
       drop index if exists user_totals_user_id_ix;
       drop index if exists user_admin_id_ix;
       create index user_totals_user_id_ix on "1".user_totals(user_id);
-      create index user_admin_id_ix on users(id) where admin;
+      create index user_admin_id_ix on users(id) where admins;
 
       CREATE OR REPLACE VIEW "1".team_totals as (
         select
@@ -67,7 +67,7 @@ class AddTeamMembersView < ActiveRecord::Migration
         where u.admin
       );
 
-      GRANT SELECT on "1".team_totals to admin;
+      GRANT SELECT on "1".team_totals to admins;
       GRANT SELECT on "1".team_totals to web_user;
       GRANT SELECT on "1".team_totals to anonymous;
     SQL

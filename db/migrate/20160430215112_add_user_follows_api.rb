@@ -22,9 +22,9 @@ create or replace view "1".user_follows as
     join public.users as f on f.id = uf.follow_id
     where public.is_owner_or_admin(uf.user_id) and f.deactivated_at is null;
 
-GRANT SELECT, INSERT, DELETE ON "1".user_follows TO admin, web_user;
-GRANT SELECT, INSERT, DELETE ON public.user_follows TO admin, web_user;
-GRANT USAGE ON SEQUENCE user_follows_id_seq TO admin, web_user;
+GRANT SELECT, INSERT, DELETE ON "1".user_follows TO admins, web_user;
+GRANT SELECT, INSERT, DELETE ON public.user_follows TO admins, web_user;
+GRANT USAGE ON SEQUENCE user_follows_id_seq TO admins, web_user;
 
 CREATE OR REPLACE FUNCTION public.insert_user_follow() RETURNS trigger
     LANGUAGE plpgsql

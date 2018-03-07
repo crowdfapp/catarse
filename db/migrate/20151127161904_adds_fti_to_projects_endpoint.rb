@@ -34,7 +34,7 @@ CREATE VIEW "1".projects AS
 
 GRANT SELECT ON TABLE "1".projects TO anonymous;
 GRANT SELECT ON TABLE "1".projects TO web_user;
-GRANT SELECT ON TABLE "1".projects TO admin;
+GRANT SELECT ON TABLE "1".projects to admins;
 
 
 CREATE OR REPLACE FUNCTION public.is_expired(expires_at timestamp)
@@ -187,7 +187,7 @@ CREATE VIEW "1".projects AS
 
 GRANT SELECT ON TABLE "1".projects TO anonymous;
 GRANT SELECT ON TABLE "1".projects TO web_user;
-GRANT SELECT ON TABLE "1".projects TO admin;
+GRANT SELECT ON TABLE "1".projects to admins;
 
 CREATE OR REPLACE FUNCTION "1".project_search(query text)
  RETURNS SETOF "1".projects

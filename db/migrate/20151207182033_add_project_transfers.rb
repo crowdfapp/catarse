@@ -20,7 +20,7 @@ CREATE OR REPLACE VIEW "1".project_transfers AS
         LEFT JOIN "1".project_totals pt
             ON pt.project_id = p.id;
 
-GRANT select, update ON "1".project_transfers TO admin;
+GRANT select, update ON "1".project_transfers to admins;
     SQL
   end
 

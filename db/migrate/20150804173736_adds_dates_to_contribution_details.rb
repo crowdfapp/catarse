@@ -46,7 +46,7 @@ class AddsDatesToContributionDetails < ActiveRecord::Migration
         JOIN payments pa ON c.id = pa.contribution_id
         JOIN users u ON c.user_id = u.id
         LEFT JOIN "1".reward_details r ON r.id = c.reward_id;
-    GRANT select ON ALL TABLES IN SCHEMA "1" TO admin;
+    GRANT select ON ALL TABLES IN SCHEMA "1" TO admins;
     SQL
   end
 
@@ -95,7 +95,7 @@ class AddsDatesToContributionDetails < ActiveRecord::Migration
         JOIN payments pa ON c.id = pa.contribution_id
         JOIN users u ON c.user_id = u.id
         LEFT JOIN "1".reward_details r ON r.id = c.reward_id;
-    GRANT select ON ALL TABLES IN SCHEMA "1" TO admin;
+    GRANT select ON ALL TABLES IN SCHEMA "1" TO admins;
     SQL
   end
 end

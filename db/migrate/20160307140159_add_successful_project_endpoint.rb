@@ -37,7 +37,7 @@ CREATE MATERIALIZED VIEW "1".successful_projects AS
 
 CREATE UNIQUE INDEX successful_projects_idx ON "1".successful_projects(project_id);
 
-GRANT SELECT ON "1".successful_projects TO anonymous, web_user, admin;
+GRANT SELECT ON "1".successful_projects TO anonymous, web_user, admins;
     SQL
   end
 

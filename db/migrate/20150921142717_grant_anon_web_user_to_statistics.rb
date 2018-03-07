@@ -1,7 +1,7 @@
 class GrantAnonWebUserToStatistics < ActiveRecord::Migration
   def up
     execute <<-SQL
-      grant select on "1".statistics to admin;
+      grant select on "1".statistics to admins;
       grant select on "1".statistics to web_user;
       grant select on "1".statistics to anonymous;
     SQL

@@ -42,7 +42,7 @@ class CreateProjectsView < ActiveRecord::Migration
          ;
       grant select on "1".projects to anonymous;
       grant select on "1".projects to web_user;
-      grant select on "1".projects to admin;
+      grant select on "1".projects to admins;
     SQL
   end
 

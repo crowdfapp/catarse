@@ -53,13 +53,13 @@ CREATE OR REPLACE VIEW "1"."project_details" AS
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
     (((p.state)::text = 'successful'::text) AND ((p.expires_at)::date >= '2016-06-06'::date)) AS can_request_transfer,
-    ("current_user"() = 'admin'::name) AS is_admin_role,
+    ("current_user"() = 'admins'::name) AS is_admin_role,
     (EXISTS ( SELECT true AS bool
            FROM (contributions c_1
              JOIN user_follows uf ON ((uf.follow_id = c_1.user_id)))
           WHERE (is_confirmed(c_1.*) AND (uf.user_id = current_user_id()) AND (c_1.project_id = p.id)))) AS contributed_by_friends,
     (case 
-        when "current_user"() = 'admin'::name then btrim(array_agg(distinct tags_lateral.admin_tag_list)::text, '{}')
+        when "current_user"() = 'admins'::name then btrim(array_agg(distinct tags_lateral.admin_tag_list)::text, '{}')
         else null::text end
     ) as admin_tag_list,
     btrim(array_agg(distinct tags_lateral.tag_list)::text, '{}') as tag_list,

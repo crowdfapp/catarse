@@ -8,7 +8,7 @@ class CreateCategoryFollowersEndpoint < ActiveRecord::Migration
     FROM category_followers c
     WHERE
         is_owner_or_admin(c.user_id);
-    grant select, insert, delete on "1".category_followers to admin;
+    grant select, insert, delete on "1".category_followers to admins;
     grant select, insert, delete on "1".category_followers to web_user;
 
       create or replace function public.insert_category_followers() returns trigger

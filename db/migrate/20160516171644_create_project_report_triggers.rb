@@ -32,23 +32,23 @@ class CreateProjectReportTriggers < ActiveRecord::Migration
       create trigger insert_project_report instead of insert on "1".project_reports
         for each row execute procedure public.insert_project_report();
 
-      GRANT SELECT ON public.settings TO web_user, anonymous, admin;
-      GRANT SELECT ON public.users TO web_user, anonymous, admin;
+      GRANT SELECT ON public.settings TO web_user, anonymous, admins;
+      GRANT SELECT ON public.users TO web_user, anonymous, admins;
       grant insert, select on "1".project_reports to anonymous;
       grant insert, select on "1".project_reports to web_user;
-      grant insert, select on "1".project_reports to admin;
+      grant insert, select on "1".project_reports to admins;
       grant insert, select on public.project_reports to anonymous;
       grant insert, select on public.project_reports to web_user;
-      grant insert, select on public.project_reports to admin;
+      grant insert, select on public.project_reports to admins;
       grant insert on public.project_report_notifications to anonymous;
       grant insert on public.project_report_notifications to web_user;
-      grant insert, select on public.project_report_notifications to admin;
+      grant insert, select on public.project_report_notifications to admins;
       grant usage on sequence project_reports_id_seq to anonymous;
       grant usage on sequence project_reports_id_seq to web_user;
-      grant usage on sequence project_reports_id_seq to admin;
+      grant usage on sequence project_reports_id_seq to admins;
       grant usage on sequence project_report_notifications_id_seq to anonymous;
       grant usage on sequence project_report_notifications_id_seq to web_user;
-      grant usage on sequence project_report_notifications_id_seq to admin;
+      grant usage on sequence project_report_notifications_id_seq to admins;
     SQL
   end
 end

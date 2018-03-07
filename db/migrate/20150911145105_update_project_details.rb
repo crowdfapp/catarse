@@ -64,7 +64,7 @@ class UpdateProjectDetails < ActiveRecord::Migration
           p.sent_to_analysis_at,
           pt.total_payment_service_fee;
 
-      grant select on "1".project_details to admin;
+      grant select on "1".project_details to admins;
       grant select on "1".project_details to web_user;
       grant select on "1".project_details to anonymous;
 
@@ -81,7 +81,7 @@ class UpdateProjectDetails < ActiveRecord::Migration
          FROM public.rewards r
          order by r.row_order ASC;
 
-      grant select on "1".reward_details to admin;
+      grant select on "1".reward_details to admins;
       grant select on "1".reward_details to web_user;
       grant select on "1".reward_details to anonymous;
     SQL
@@ -126,7 +126,7 @@ class UpdateProjectDetails < ActiveRecord::Migration
           p.sent_to_analysis_at,
           pt.total_payment_service_fee;
 
-      grant select on "1".project_details to admin;
+      grant select on "1".project_details to admins;
       grant select on "1".project_details to web_user;
       grant select on "1".project_details to anonymous;
 
@@ -142,7 +142,7 @@ class UpdateProjectDetails < ActiveRecord::Migration
           public.waiting_payment_count(r.*) AS waiting_payment_count
          FROM public.rewards r;
 
-      grant select on "1".reward_details to admin;
+      grant select on "1".reward_details to admins;
       grant select on "1".reward_details to web_user;
       grant select on "1".reward_details to anonymous;
     SQL

@@ -17,7 +17,7 @@ CREATE OR REPLACE VIEW "1".categories AS
      LEFT JOIN public.flexible_projects fp ON ((fp.project_id = p.id)))
   GROUP BY c.id;
 
-GRANT SELECT on "1".categories TO admin, web_user, anonymous;
+GRANT SELECT on "1".categories TO admins, web_user, anonymous;
     SQL
   end
 
@@ -36,7 +36,7 @@ CREATE OR REPLACE VIEW "1".categories AS
      LEFT JOIN public.flexible_projects fp ON ((fp.project_id = p.id)))
   GROUP BY c.id;
 
-GRANT SELECT on "1".categories TO admin, web_user, anonymous;
+GRANT SELECT on "1".categories TO admins, web_user, anonymous;
     SQL
   end
 end

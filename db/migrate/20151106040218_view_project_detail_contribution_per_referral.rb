@@ -27,7 +27,7 @@ class ViewProjectDetailContributionPerReferral < ActiveRecord::Migration
 
       grant select on "1".project_contributions_per_ref to anonymous;
       grant select on "1".project_contributions_per_ref to web_user;
-      grant select on "1".project_contributions_per_ref to admin;
+      grant select on "1".project_contributions_per_ref to admins;
 
     SQL
   end

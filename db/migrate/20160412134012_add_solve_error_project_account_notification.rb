@@ -19,7 +19,7 @@ CREATE OR REPLACE FUNCTION solve_error_reason() RETURNS trigger
             SELECT * FROM public.projects
                 WHERE id = v_project_acc.project_id INTO v_project;
 
-            IF current_user <> 'admin' THEN
+            IF current_user <> 'admins' THEN
                 RAISE EXCEPTION 'insufficient privileges to delete on project_errors_accounts';
             END IF;
 

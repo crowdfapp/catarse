@@ -8,7 +8,7 @@ class AddProjectDetails < ActiveRecord::Migration
       AS $_$
         SELECT
           current_setting('user_vars.user_id') = $1::text
-          OR current_user = 'admin';
+          OR current_user = 'admins';
       $_$;
 
       drop view "1".reward_details cascade;
@@ -88,8 +88,8 @@ class AddProjectDetails < ActiveRecord::Migration
           p.expires_at,
           pt.total_payment_service_fee;
 
-      grant select on "1".contribution_details to admin;
-      grant select on "1".project_details to admin;
+      grant select on "1".contribution_details to admins;
+      grant select on "1".project_details to admins;
       grant select on "1".project_details to web_user;
       grant select on "1".project_details to anonymous;
     SQL
@@ -97,7 +97,7 @@ class AddProjectDetails < ActiveRecord::Migration
 
   def down
     execute <<-SQL
-      revoke select on "1".project_details from admin;
+      revoke select on "1".project_details from admins;
       revoke select on "1".project_details from web_user;
       revoke select on "1".project_details from anonymous;
       drop function public.is_owner_or_admin(integer);

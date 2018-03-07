@@ -65,7 +65,7 @@ CREATE VIEW "1".project_details AS
     public.user_signed_in() AS user_signed_in,
     public.current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    ("current_user"() = 'admin'::name) AS is_admin_role
+    ("current_user"() = 'admins'::name) AS is_admin_role
    FROM ((((((((public.projects p
      JOIN public.categories c ON ((c.id = p.category_id)))
      JOIN public.users u ON ((u.id = p.user_id)))
@@ -78,7 +78,7 @@ CREATE VIEW "1".project_details AS
   GROUP BY p.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.total_contributions, p.state, p.expires_at, p.sent_to_analysis_at, pt.total_payment_service_fee, fp.state, pt.total_contributors;
 
 REVOKE ALL ON TABLE "1".project_details FROM PUBLIC;
-GRANT SELECT ON TABLE "1".project_details TO admin;
+GRANT SELECT ON TABLE "1".project_details to admins;
 GRANT SELECT ON TABLE "1".project_details TO web_user;
 GRANT SELECT ON TABLE "1".project_details TO anonymous;
 
@@ -130,7 +130,7 @@ CREATE VIEW "1".contribution_details AS
 CREATE TRIGGER update_from_details_to_contributions INSTEAD OF UPDATE ON "1".contribution_details FOR EACH ROW EXECUTE PROCEDURE public.update_from_details_to_contributions();
 
 REVOKE ALL ON TABLE "1".contribution_details FROM PUBLIC;
-GRANT SELECT,UPDATE ON TABLE "1".contribution_details TO admin;
+GRANT SELECT,UPDATE ON TABLE "1".contribution_details to admins;
 
 CREATE VIEW "1".projects AS
  SELECT p.id AS project_id,
@@ -163,7 +163,7 @@ CREATE VIEW "1".projects AS
 
 
 REVOKE ALL ON TABLE "1".projects FROM PUBLIC;
-GRANT SELECT ON TABLE "1".projects TO admin;
+GRANT SELECT ON TABLE "1".projects to admins;
 GRANT SELECT ON TABLE "1".projects TO web_user;
 GRANT SELECT ON TABLE "1".projects TO anonymous;
 
@@ -267,7 +267,7 @@ CREATE VIEW "1".project_details AS
     public.user_signed_in() AS user_signed_in,
     public.current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    ("current_user"() = 'admin'::name) AS is_admin_role
+    ("current_user"() = 'admins'::name) AS is_admin_role
    FROM ((((((((public.projects p
      JOIN public.categories c ON ((c.id = p.category_id)))
      JOIN public.users u ON ((u.id = p.user_id)))
@@ -280,7 +280,7 @@ CREATE VIEW "1".project_details AS
   GROUP BY p.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.total_contributions, p.state, p.expires_at, p.sent_to_analysis_at, pt.total_payment_service_fee, fp.state, pt.total_contributors;
 
 REVOKE ALL ON TABLE "1".project_details FROM PUBLIC;
-GRANT SELECT ON TABLE "1".project_details TO admin;
+GRANT SELECT ON TABLE "1".project_details to admins;
 GRANT SELECT ON TABLE "1".project_details TO web_user;
 GRANT SELECT ON TABLE "1".project_details TO anonymous;
 
@@ -332,7 +332,7 @@ CREATE VIEW "1".contribution_details AS
 CREATE TRIGGER update_from_details_to_contributions INSTEAD OF UPDATE ON "1".contribution_details FOR EACH ROW EXECUTE PROCEDURE public.update_from_details_to_contributions();
 
 REVOKE ALL ON TABLE "1".contribution_details FROM PUBLIC;
-GRANT SELECT,UPDATE ON TABLE "1".contribution_details TO admin;
+GRANT SELECT,UPDATE ON TABLE "1".contribution_details to admins;
 
 CREATE VIEW "1".projects AS
  SELECT p.id AS project_id,
@@ -365,7 +365,7 @@ CREATE VIEW "1".projects AS
 
 
 REVOKE ALL ON TABLE "1".projects FROM PUBLIC;
-GRANT SELECT ON TABLE "1".projects TO admin;
+GRANT SELECT ON TABLE "1".projects to admins;
 GRANT SELECT ON TABLE "1".projects TO web_user;
 GRANT SELECT ON TABLE "1".projects TO anonymous;
 

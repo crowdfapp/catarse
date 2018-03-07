@@ -53,7 +53,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
     u.subscribed_to_project_posts,
     u.subscribed_to_new_followers,
     u.subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink,
     (case when is_owner_or_admin(u.id) then u.email_active else null end) as email_active
    FROM (users u
@@ -114,7 +114,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
     u.subscribed_to_project_posts,
     u.subscribed_to_new_followers,
     u.subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink
    FROM (users u
      LEFT JOIN "1".user_totals ut ON ((ut.user_id = u.id)));

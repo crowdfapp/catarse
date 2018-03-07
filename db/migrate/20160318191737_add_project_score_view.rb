@@ -21,7 +21,7 @@ CREATE VIEW "1".project_scores AS
     ) lt on true
     WHERE p.open_for_contributions;
 
-GRANT SELECT ON "1".project_scores TO admin, web_user, anonymous;
+GRANT SELECT ON "1".project_scores TO admins, web_user, anonymous;
 
 CREATE OR REPLACE FUNCTION public.score(pr "1".projects) RETURNS numeric
     STABLE LANGUAGE sql

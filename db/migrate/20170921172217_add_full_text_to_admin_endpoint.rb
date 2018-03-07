@@ -55,7 +55,7 @@ SELECT p.id AS project_id,
   WHERE p.state::text <> 'deleted'::text;
 
 
-    grant all on "1".admin_projects to admin;
+    grant all on "1".admin_projects to admins;
   SQL
   end
 end

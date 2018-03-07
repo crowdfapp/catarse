@@ -58,7 +58,7 @@ class AddRecommendationsEndpoint < ActiveRecord::Migration
     GROUP BY recommendations.user_id,
              recommendations.project_id
     ORDER BY sum(recommendations.count)::bigint DESC;
-    GRANT SELECT ON "1".recommended_projects to admin, web_user;
+    GRANT SELECT ON "1".recommended_projects to admins, web_user;
     SQL
   end
   def down

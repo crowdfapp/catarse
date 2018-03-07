@@ -34,7 +34,7 @@ class RemoveCreditsFromUserTotals < ActiveRecord::Migration
 
       select deps_restore_dependencies('1', 'user_totals');
       grant select on "1".user_totals to anonymous;
-      grant select on "1".user_totals to admin;
+      grant select on "1".user_totals to admins;
       grant select on "1".user_totals to web_user;
       create index on "1".user_totals (id);
     SQL

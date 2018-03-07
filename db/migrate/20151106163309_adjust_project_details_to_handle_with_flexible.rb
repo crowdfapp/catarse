@@ -50,7 +50,7 @@ CREATE VIEW "1".project_details AS
     user_signed_in() AS user_signed_in,
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    "current_user"() = 'admin'::name AS is_admin_role
+    "current_user"() = 'admins'::name AS is_admin_role
    FROM projects p
      JOIN categories c ON c.id = p.category_id
      JOIN users u ON u.id = p.user_id
@@ -62,19 +62,19 @@ CREATE VIEW "1".project_details AS
      LEFT JOIN project_notifications pn ON pn.project_id = p.id
   GROUP BY p.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.total_contributions, p.state, p.expires_at, p.sent_to_analysis_at, pt.total_payment_service_fee, fp.state;
 
-grant select on "1".project_details to admin;
+grant select on "1".project_details to admins;
 grant select on "1".project_details to web_user;
 grant select on "1".project_details to anonymous;
 
-grant select on public.flexible_projects to admin;
+grant select on public.flexible_projects to admins;
 grant select on public.flexible_projects to web_user;
 grant select on public.flexible_projects to anonymous;
 
-grant select on public.flexible_project_states to admin;
+grant select on public.flexible_project_states to admins;
 grant select on public.flexible_project_states to web_user;
 grant select on public.flexible_project_states to anonymous;
 
-grant select on public.project_states to admin;
+grant select on public.project_states to admins;
 grant select on public.project_states to web_user;
 grant select on public.project_states to anonymous;
 
@@ -109,7 +109,7 @@ CREATE VIEW "1".projects AS
      LEFT JOIN public.cities c ON ((c.id = p.city_id)))
      LEFT JOIN public.states s ON ((s.id = c.state_id)));
 
-grant select on "1".projects to admin;
+grant select on "1".projects to admins;
 grant select on "1".projects to web_user;
 grant select on "1".projects to anonymous;
 
@@ -174,7 +174,7 @@ CREATE VIEW "1".project_details AS
     user_signed_in() AS user_signed_in,
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    "current_user"() = 'admin'::name AS is_admin_role
+    "current_user"() = 'admins'::name AS is_admin_role
    FROM projects p
      JOIN categories c ON c.id = p.category_id
      JOIN users u ON u.id = p.user_id
@@ -186,19 +186,19 @@ CREATE VIEW "1".project_details AS
   GROUP BY p.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.total_contributions, p.state, p.expires_at, p.sent_to_analysis_at, pt.total_payment_service_fee;
 
 
-grant select on "1".project_details to admin;
+grant select on "1".project_details to admins;
 grant select on "1".project_details to web_user;
 grant select on "1".project_details to anonymous;
 
-revoke select on public.flexible_projects from admin;
+revoke select on public.flexible_projects from admins;
 revoke select on public.flexible_projects from web_user;
 revoke select on public.flexible_projects from anonymous;
 
-revoke select on public.flexible_project_states from admin;
+revoke select on public.flexible_project_states from admins;
 revoke select on public.flexible_project_states from web_user;
 revoke select on public.flexible_project_states from anonymous;
 
-revoke select on public.project_states from admin;
+revoke select on public.project_states from admins;
 revoke select on public.project_states from web_user;
 revoke select on public.project_states from anonymous;
 
@@ -230,7 +230,7 @@ CREATE VIEW "1".projects AS
      LEFT JOIN public.cities c ON ((c.id = p.city_id)))
      LEFT JOIN public.states s ON ((s.id = c.state_id)));
 
-grant select on "1".projects to admin;
+grant select on "1".projects to admins;
 grant select on "1".projects to web_user;
 grant select on "1".projects to anonymous;
 

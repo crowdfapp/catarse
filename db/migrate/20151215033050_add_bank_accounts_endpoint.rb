@@ -30,17 +30,17 @@ CREATE OR REPLACE VIEW "1".bank_accounts AS
     LEFT JOIN public.banks b ON b.id = pa.bank_id
     WHERE public.is_owner_or_admin(pac.user_id);
 
-GRANT SELECT ON "1".bank_accounts TO admin, web_user;
-GRANT SELECT ON public.project_accounts TO admin, web_user;
-GRANT SELECT ON public.banks TO admin, web_user;
+GRANT SELECT ON "1".bank_accounts TO admins, web_user;
+GRANT SELECT ON public.project_accounts TO admins, web_user;
+GRANT SELECT ON public.banks TO admins, web_user;
     SQL
   end
 
   def down
     execute <<-SQL
 DROP VIEW "1".bank_accounts;
-REVOKE SELECT ON public.project_accounts FROM admin, web_user;
-REVOKE SELECT ON public.banks FROM admin, web_user;
+REVOKE SELECT ON public.project_accounts FROM admins, web_user;
+REVOKE SELECT ON public.banks FROM admins, web_user;
     SQL
   end
 end

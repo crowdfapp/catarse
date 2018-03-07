@@ -89,9 +89,9 @@ CREATE TRIGGER approve_project_account
     INSTEAD OF INSERT ON "1".project_accounts
     FOR EACH ROW EXECUTE PROCEDURE public.approve_project_account();
 
-GRANT INSERT ON "1".project_accounts TO web_user, admin;
-GRANT SELECT ON "1".project_transfers TO web_user, admin;
-GRANT SELECT ON "1".project_totals TO web_user, admin;
+GRANT INSERT ON "1".project_accounts TO web_user, admins;
+GRANT SELECT ON "1".project_transfers TO web_user, admins;
+GRANT SELECT ON "1".project_totals TO web_user, admins;
     SQL
     end
 

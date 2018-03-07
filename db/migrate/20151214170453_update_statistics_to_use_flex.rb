@@ -41,7 +41,7 @@ CREATE MATERIALIZED VIEW "1".statistics AS
         WHERE coalesce(fp.state, p.state)::text <> ALL (ARRAY['draft', 'rejected'])
     ) projects_totals;
 
-GRANT SELECT ON "1".statistics TO admin, web_user, anonymous;
+GRANT SELECT ON "1".statistics TO admins, web_user, anonymous;
     SQL
   end
 
@@ -78,7 +78,7 @@ CREATE MATERIALIZED VIEW "1".statistics AS
            FROM projects
           WHERE projects.state::text <> ALL (ARRAY['draft'::character varying::text, 'rejected'::character varying::text])) projects_totals;
 
-GRANT SELECT ON "1".statistics TO admin, web_user, anonymous;
+GRANT SELECT ON "1".statistics TO admins, web_user, anonymous;
     SQL
   end
 end

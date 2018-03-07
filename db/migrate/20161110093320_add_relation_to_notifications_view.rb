@@ -110,7 +110,7 @@ CREATE OR REPLACE VIEW "1"."notifications" AS
            FROM ((contribution_notifications cn
              JOIN contributions co ON ((co.id = cn.contribution_id)))
              JOIN projects p ON ((p.id = co.project_id)))) n;
-    grant select on "1".notifications to admin;
+    grant select on "1".notifications to admins;
     }
   end
 
@@ -187,7 +187,7 @@ CREATE OR REPLACE VIEW "1"."notifications" AS
            FROM ((contribution_notifications cn
              JOIN contributions co ON ((co.id = cn.contribution_id)))
              JOIN projects p ON ((p.id = co.project_id)))) n;
-    grant select on "1".notifications to admin;
+    grant select on "1".notifications to admins;
     }
   end
 end

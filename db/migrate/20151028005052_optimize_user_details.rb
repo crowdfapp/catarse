@@ -43,7 +43,7 @@ class OptimizeUserDetails < ActiveRecord::Migration
 
       CREATE INDEX users_full_text_index_ix ON users USING gin (full_text_index);
       GRANT SELECT ON "1".user_details TO public;
-      GRANT SELECT ON "1".user_full_details TO admin;
+      GRANT SELECT ON "1".user_full_details to admins;
     SQL
   end
 

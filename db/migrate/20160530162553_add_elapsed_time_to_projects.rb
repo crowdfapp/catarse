@@ -38,7 +38,7 @@ class AddElapsedTimeToProjects < ActiveRecord::Migration
      JOIN LATERAL zone_timestamp(online_at(p.*)) od(od) ON true
      JOIN LATERAL state_order(p.*) so(so) ON true;
 
-    grant select on "1".projects to admin;
+    grant select on "1".projects to admins;
     grant select on "1".projects to web_user;
     grant select on "1".projects to anonymous;
      

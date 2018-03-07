@@ -46,8 +46,8 @@ class AddContributionDetailsFields < ActiveRecord::Migration
          JOIN public.payments pa ON ((c.id = pa.contribution_id)))
          JOIN public.users u ON ((c.user_id = u.id)));
 
-    GRANT select ON "1".contribution_details TO admin;
-    GRANT update ON "1".contribution_details TO admin;
+    GRANT select ON "1".contribution_details TO admins;
+    GRANT update ON "1".contribution_details TO admins;
     SQL
   end
   def down
@@ -97,8 +97,8 @@ class AddContributionDetailsFields < ActiveRecord::Migration
          JOIN public.payments pa ON ((c.id = pa.contribution_id)))
          JOIN public.users u ON ((c.user_id = u.id)));
 
-    GRANT select ON "1".contribution_details TO admin;
-    GRANT update ON "1".contribution_details TO admin;
+    GRANT select ON "1".contribution_details TO admins;
+    GRANT update ON "1".contribution_details TO admins;
     SQL
   end
 end

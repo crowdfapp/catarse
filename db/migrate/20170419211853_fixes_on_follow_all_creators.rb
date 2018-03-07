@@ -1,7 +1,7 @@
 class FixesOnFollowAllCreators < ActiveRecord::Migration
   def change
     execute %Q{
-    grant select on public.contributions to admin, web_user;
+    grant select on public.contributions to admins, web_user;
 CREATE OR REPLACE FUNCTION "1".follow_all_creators()
  RETURNS void
  LANGUAGE sql

@@ -35,7 +35,7 @@ CREATE OR REPLACE VIEW "1"."project_contributions" AS
      ) as lt on true
   WHERE (was_confirmed(c.*) OR waiting_payment(pa.*)) AND ((NOT c.anonymous) OR is_owner_or_admin(p.user_id));
 
-GRANT SELECT ON "1".project_contributions TO anonymous, web_user, admin;
+GRANT SELECT ON "1".project_contributions TO anonymous, web_user, admins;
     }
   end
 
@@ -64,7 +64,7 @@ CREATE OR REPLACE VIEW "1".project_contributions AS
      LEFT JOIN "1".user_totals ut ON ((ut.user_id = u.id)))
   WHERE ((was_confirmed(c.*) OR waiting_payment(pa.*)) AND ((NOT c.anonymous) OR is_owner_or_admin(p.user_id)));
 
-GRANT SELECT ON "1".project_contributions TO anonymous, web_user, admin;
+GRANT SELECT ON "1".project_contributions TO anonymous, web_user, admins;
     }
   end
 end

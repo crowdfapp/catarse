@@ -40,7 +40,7 @@ class FixPercentageCalcOnProjectContributionsPerLocation < ActiveRecord::Migrati
         group by
         	addr_agg.project_id;
 
-      grant select on "1".project_contributions_per_location to admin;
+      grant select on "1".project_contributions_per_location to admins;
       grant select on "1".project_contributions_per_location to web_user;
       grant select on "1".project_contributions_per_location to anonymous;
     SQL
@@ -85,7 +85,7 @@ class FixPercentageCalcOnProjectContributionsPerLocation < ActiveRecord::Migrati
         group by
         	addr_agg.project_id;
 
-      grant select on "1".project_contributions_per_location to admin;
+      grant select on "1".project_contributions_per_location to admins;
       grant select on "1".project_contributions_per_location to web_user;
       grant select on "1".project_contributions_per_location to anonymous;
     SQL

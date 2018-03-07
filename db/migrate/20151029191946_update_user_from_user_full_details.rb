@@ -6,7 +6,7 @@ class UpdateUserFromUserFullDetails < ActiveRecord::Migration
     FOR EACH ROW EXECUTE PROCEDURE
     public.update_user_from_user_details();
 
-    GRANT UPDATE (deactivated_at) ON "1".user_full_details, public.users TO admin;
+    GRANT UPDATE (deactivated_at) ON "1".user_full_details, public.users to admins;
     SQL
   end
 

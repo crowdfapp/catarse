@@ -27,10 +27,10 @@ create or replace function "1".invite_project_email(data json)
         end;
     $$;
 
-grant select on public.project_invites to admin, web_user;
-grant insert on public.project_invites to admin, web_user;
-grant execute on function "1".invite_project_email(json) to admin, web_user;
-grant usage on SEQUENCE public.project_invites_id_seq to admin, web_user;
+grant select on public.project_invites to admins, web_user;
+grant insert on public.project_invites to admins, web_user;
+grant execute on function "1".invite_project_email(json) to admins, web_user;
+grant usage on SEQUENCE public.project_invites_id_seq to admins, web_user;
     }
   end
 

@@ -64,7 +64,7 @@ SET STATEMENT_TIMEOUT TO 0;
      JOIN LATERAL zone_timestamp(online_at(p.*)) od(od) ON true
      JOIN LATERAL state_order(p.*) so(so) ON true;
 
-    grant select on "1".projects to admin;
+    grant select on "1".projects to admins;
     grant select on "1".projects to web_user;
     grant select on "1".projects to anonymous;
 
@@ -133,8 +133,8 @@ SET STATEMENT_TIMEOUT TO 0;
          JOIN public.payments pa ON ((c.id = pa.contribution_id)))
          JOIN public.users u ON ((c.user_id = u.id)));
 
-    GRANT select ON "1".contribution_details TO admin;
-    GRANT update ON "1".contribution_details TO admin;
+    GRANT select ON "1".contribution_details to admins;
+    GRANT update ON "1".contribution_details to admins;
 
 
     CREATE OR REPLACE VIEW "1".project_transitions AS
@@ -145,7 +145,7 @@ SET STATEMENT_TIMEOUT TO 0;
         project_transitions.created_at
        FROM public.project_transitions ;
 
-    GRANT select ON "1".project_transitions TO admin, web_user, anonymous;
+    GRANT select ON "1".project_transitions TO admins, web_user, anonymous;
 
     DROP MATERIALIZED VIEW "1".finished_projects;
     CREATE MATERIALIZED VIEW "1".finished_projects AS
@@ -184,7 +184,7 @@ SET STATEMENT_TIMEOUT TO 0;
               WHERE (((pt.state)::text = ANY (ARRAY['successful'::text, 'waiting_funds'::text, 'failed'::text])) AND pt.most_recent AND (pt.project_id = p.id))))
       WITH NO DATA;
 
-      GRANT SELECT ON "1".finished_projects TO anonymous, web_user, admin;
+      GRANT SELECT ON "1".finished_projects TO anonymous, web_user, admins;
 
       DROP VIEW "1".project_details;
       CREATE OR REPLACE VIEW "1".project_details AS
@@ -238,7 +238,7 @@ SET STATEMENT_TIMEOUT TO 0;
         user_signed_in() AS user_signed_in,
         current_user_already_in_reminder(p.*) AS in_reminder,
         count(pp.*) AS total_posts,
-        "current_user"() = 'admin'::name AS is_admin_role
+        "current_user"() = 'admins'::name AS is_admin_role
        FROM projects p
          JOIN categories c ON c.id = p.category_id
          JOIN users u ON u.id = p.user_id
@@ -249,7 +249,7 @@ SET STATEMENT_TIMEOUT TO 0;
          LEFT JOIN project_reminders pr ON pr.project_id = p.id
       GROUP BY p.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.paid_pledged, pt.total_contributions, p.state, p.expires_at, pt.total_payment_service_fee, pt.total_contributors;
 
-    grant select on "1".project_details to admin;
+    grant select on "1".project_details to admins;
     grant select on "1".project_details to web_user;
     grant select on "1".project_details to anonymous;
 
@@ -284,7 +284,7 @@ SET STATEMENT_TIMEOUT TO 0;
               WHERE ((p.state)::text <> ALL (ARRAY['draft'::text, 'rejected'::text]))) projects_totals
       WITH NO DATA;
 
-    GRANT SELECT ON "1".statistics TO admin, web_user, anonymous;
+    GRANT SELECT ON "1".statistics TO admins, web_user, anonymous;
 
 
     DROP MATERIALIZED VIEW "1".category_totals;
@@ -339,7 +339,7 @@ SET STATEMENT_TIMEOUT TO 0;
          LEFT JOIN followers cf USING (category_id))
       WITH NO DATA;
 
-      GRANT SELECT ON "1".category_totals TO admin, anonymous, web_user;
+      GRANT SELECT ON "1".category_totals TO admins, anonymous, web_user;
 
       DROP MATERIALIZED VIEW IF EXISTS "1".successful_projects;
       CREATE MATERIALIZED VIEW "1".successful_projects AS
@@ -379,7 +379,7 @@ SET STATEMENT_TIMEOUT TO 0;
 
       CREATE UNIQUE INDEX successful_projects_idx ON "1".successful_projects(project_id);
 
-      GRANT SELECT ON "1".successful_projects TO anonymous, web_user, admin;
+      GRANT SELECT ON "1".successful_projects TO anonymous, web_user, admins;
 
       DROP FUNCTION mode(projects);
 

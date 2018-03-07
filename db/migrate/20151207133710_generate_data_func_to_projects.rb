@@ -19,7 +19,7 @@ CREATE OR REPLACE VIEW "1".project_transitions AS
     FROM flexible_project_transitions fpt
     JOIN flexible_projects fp on fpt.flexible_project_id = fp.id;
 
-GRANT select ON "1".project_transitions TO admin;
+GRANT select ON "1".project_transitions to admins;
 
 CREATE OR REPLACE FUNCTION get_date_from_project_transitions(project_id integer, state text) RETURNS timestamp without time zone
     LANGUAGE sql STABLE

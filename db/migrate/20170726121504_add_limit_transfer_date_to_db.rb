@@ -27,7 +27,7 @@ CREATE OR REPLACE VIEW "1"."balance_transfers" AS
     u.public_name AS user_public_name,
     u.email AS user_email,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN bt.admin_notes
+            WHEN ("current_user"() = 'admins'::name) THEN bt.admin_notes
             ELSE NULL::text
         END AS admin_notes
    FROM (((balance_transfers bt
@@ -69,7 +69,7 @@ CREATE OR REPLACE VIEW "1"."balance_transfers" AS
     u.public_name AS user_public_name,
     u.email AS user_email,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN bt.admin_notes
+            WHEN ("current_user"() = 'admins'::name) THEN bt.admin_notes
             ELSE NULL::text
         END AS admin_notes
    FROM (((balance_transfers bt

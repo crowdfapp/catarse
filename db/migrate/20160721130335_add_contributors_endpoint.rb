@@ -23,7 +23,7 @@ where (case when p.state = 'failed' then c.was_confirmed else c.is_confirmed end
     and u.deactivated_at is null
 group by u.id, c.project_id, ut.total_contributed_projects, ut.total_published_projects;
 
-GRANT SELECT ON "1".contributors TO admin, anonymous, web_user;
+GRANT SELECT ON "1".contributors TO admins, anonymous, web_user;
     }
   end
 

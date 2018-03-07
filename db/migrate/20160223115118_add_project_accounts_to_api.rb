@@ -38,7 +38,7 @@ CREATE OR REPLACE VIEW "1".project_accounts AS
         LEFT JOIN "1".balance_transfers bt ON bt.project_id = p.id
     WHERE public.is_owner_or_admin(p.user_id);
 
-GRANT SELECT ON "1".project_accounts TO admin, web_user;
+GRANT SELECT ON "1".project_accounts TO admins, web_user;
     SQL
   end
 

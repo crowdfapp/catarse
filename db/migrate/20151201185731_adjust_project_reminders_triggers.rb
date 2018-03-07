@@ -40,20 +40,20 @@ CREATE OR REPLACE FUNCTION delete_project_reminder() RETURNS trigger
       $$;
 
 grant insert, select, delete on public.project_reminders to web_user;
-grant insert, select, delete on public.project_reminders to admin;
+grant insert, select, delete on public.project_reminders to admins;
 
 grant usage on sequence project_reminders_id_seq to web_user;
-grant usage on sequence project_reminders_id_seq to admin;
+grant usage on sequence project_reminders_id_seq to admins;
     SQL
   end
 
   def down
     execute <<-SQL
 revoke insert, select, delete on public.project_reminders from web_user;
-revoke insert, select, delete on public.project_reminders from admin;
+revoke insert, select, delete on public.project_reminders from admins;
 
 revoke usage on sequence project_reminders_id_seq from web_user;
-revoke usage on sequence project_reminders_id_seq from admin;
+revoke usage on sequence project_reminders_id_seq from admins;
 
 CREATE OR REPLACE FUNCTION insert_project_reminder() RETURNS trigger
     LANGUAGE plpgsql

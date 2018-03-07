@@ -28,7 +28,7 @@ class RemoveUserFullDetails < ActiveRecord::Migration
          FROM users u
            LEFT JOIN "1".user_totals ut ON ut.user_id = u.id;
 
-      GRANT SELECT ON "1".user_full_details TO admin;
+      GRANT SELECT ON "1".user_full_details to admins;
     SQL
   end
 end

@@ -42,7 +42,7 @@ class AddIsAdminToUserDetails < ActiveRecord::Migration
     u.subscribed_to_project_posts,
     u.subscribed_to_new_followers,
     u.subscribed_to_friends_contributions,
-    (current_user = 'admin') as is_admin,
+    (current_user = 'admins') as is_admin,
     u.permalink
    FROM users u
      LEFT JOIN "1".user_totals ut ON ut.user_id = u.id;

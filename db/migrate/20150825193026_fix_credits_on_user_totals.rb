@@ -46,7 +46,7 @@ class FixCreditsOnUserTotals < ActiveRecord::Migration
         order by u.name asc
       );
 
-      GRANT SELECT on "1".team_members to admin;
+      GRANT SELECT on "1".team_members to admins;
       GRANT SELECT on "1".team_members to web_user;
       GRANT SELECT on "1".team_members to anonymous;
     SQL
@@ -90,7 +90,7 @@ class FixCreditsOnUserTotals < ActiveRecord::Migration
         order by u.name asc
       );
 
-      GRANT SELECT on "1".team_members to admin;
+      GRANT SELECT on "1".team_members to admins;
       GRANT SELECT on "1".team_members to web_user;
       GRANT SELECT on "1".team_members to anonymous;
     SQL

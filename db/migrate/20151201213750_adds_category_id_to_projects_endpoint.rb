@@ -36,7 +36,7 @@ CREATE VIEW "1".projects AS
      LEFT JOIN public.cities c ON ((c.id = p.city_id)))
      LEFT JOIN public.states s ON ((s.id = c.state_id)));
 
-GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admin;
+GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admins;
 
 CREATE OR REPLACE FUNCTION public.near_me("1".projects)
  RETURNS boolean
@@ -114,7 +114,7 @@ CREATE VIEW "1".projects AS
      LEFT JOIN public.cities c ON ((c.id = p.city_id)))
      LEFT JOIN public.states s ON ((s.id = c.state_id)));
 
-GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admin;
+GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admins;
 
 CREATE OR REPLACE FUNCTION public.near_me("1".projects)
  RETURNS boolean

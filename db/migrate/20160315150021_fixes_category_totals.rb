@@ -58,7 +58,7 @@ FROM ((project_stats p
 
 create unique index on "1".category_totals (category_id);
 
-GRANT SELECT ON "1".category_totals TO admin, anonymous, web_user;
+GRANT SELECT ON "1".category_totals TO admins, anonymous, web_user;
     SQL
   end
 end

@@ -11,7 +11,7 @@ CREATE OR REPLACE VIEW "1"."cities" AS
     unaccent(c.name)|| ' ' ||s.acronym AS search_index
    FROM (cities c
      JOIN states s ON ((s.id = c.state_id)));
-GRANT SELECT ON "1".cities TO anonymous, web_user, admin;
+GRANT SELECT ON "1".cities TO anonymous, web_user, admins;
 }
   end
 
@@ -27,7 +27,7 @@ CREATE OR REPLACE VIEW "1"."cities" AS
     to_tsvector(unaccent(c.name)) AS search_index
    FROM (cities c
      JOIN states s ON ((s.id = c.state_id)));
-GRANT SELECT ON "1".cities TO anonymous, web_user, admin;
+GRANT SELECT ON "1".cities TO anonymous, web_user, admins;
 }
   end
 end

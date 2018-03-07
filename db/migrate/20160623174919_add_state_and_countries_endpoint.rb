@@ -7,7 +7,7 @@ class AddStateAndCountriesEndpoint < ActiveRecord::Migration
     CREATE MATERIALIZED VIEW "1".states AS
       SELECT * FROM states;
 
-    GRANT SELECT ON "1".countries, "1".states to admin, web_user, anonymous;
+    GRANT SELECT ON "1".countries, "1".states to admins, web_user, anonymous;
     SQL
   end
   def down

@@ -43,7 +43,7 @@ class ReplaceProjectDetailsAndDropOldImgFunction < ActiveRecord::Migration
           user_signed_in() AS user_signed_in,
           current_user_already_in_reminder(p.*) AS in_reminder,
           count(pp.*) AS total_posts,
-          "current_user"() = 'admin'::name AS is_admin_role
+          "current_user"() = 'admins'::name AS is_admin_role
          FROM projects p
            JOIN categories c ON c.id = p.category_id
            JOIN users u ON u.id = p.user_id
@@ -114,7 +114,7 @@ class ReplaceProjectDetailsAndDropOldImgFunction < ActiveRecord::Migration
           user_signed_in() AS user_signed_in,
           current_user_already_in_reminder(p.*) AS in_reminder,
           count(pp.*) AS total_posts,
-          "current_user"() = 'admin'::name AS is_admin_role
+          "current_user"() = 'admins'::name AS is_admin_role
          FROM projects p
            JOIN categories c ON c.id = p.category_id
            JOIN users u ON u.id = p.user_id

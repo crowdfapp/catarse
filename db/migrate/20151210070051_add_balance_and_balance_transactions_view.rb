@@ -9,8 +9,8 @@ CREATE OR REPLACE VIEW "1".balances AS
     WHERE public.is_owner_or_admin(user_id)
     GROUP BY user_id;
 
-GRANT SELECT ON public.balance_transactions TO web_user, admin;
-GRANT SELECT ON "1".balances TO web_user, admin;
+GRANT SELECT ON public.balance_transactions TO web_user, admins;
+GRANT SELECT ON "1".balances TO web_user, admins;
 
 CREATE OR REPLACE VIEW "1".balance_transactions AS
     select
@@ -41,7 +41,7 @@ CREATE OR REPLACE VIEW "1".balance_transactions AS
     group by bt.created_at, bt.user_id
     order by created_at desc;
 
-GRANT SELECT ON "1".balance_transactions TO web_user, admin;
+GRANT SELECT ON "1".balance_transactions TO web_user, admins;
     SQL
   end
 

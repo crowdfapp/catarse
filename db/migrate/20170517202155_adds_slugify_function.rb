@@ -7,7 +7,7 @@ class AddsSlugifyFunction < ActiveRecord::Migration
         SELECT regexp_replace(regexp_replace(lower(unaccent(val)),'[^a-z0-9]+','-','g'),'^-|-$','','g');
     $BODY$
     LANGUAGE sql IMMUTABLE;
-    GRANT SELECT ON "1".public_tags TO anonymous, web_user, admin;
+    GRANT SELECT ON "1".public_tags TO anonymous, web_user, admins;
     SQL
   end
   def down

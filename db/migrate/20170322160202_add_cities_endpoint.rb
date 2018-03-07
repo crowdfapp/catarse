@@ -12,7 +12,7 @@ create or replace view "1".cities as
     from cities c
         join states s on s.id = c.state_id;
 
-grant select on "1".cities to admin, web_user, anonymous;
+grant select on "1".cities to admins, web_user, anonymous;
 }
   end
 end

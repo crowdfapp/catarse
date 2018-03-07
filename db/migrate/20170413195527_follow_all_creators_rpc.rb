@@ -29,7 +29,7 @@ class FollowAllCreatorsRpc < ActiveRecord::Migration
             );
       $$;
 
-      grant execute on function "1".follow_all_creators() to admin, web_user;
+      grant execute on function "1".follow_all_creators() to admins, web_user;
     SQL
   end
   def down

@@ -41,7 +41,7 @@ CREATE MATERIALIZED VIEW "1".finished_projects AS
 
 CREATE UNIQUE INDEX finished_project_uidx ON "1".finished_projects(project_id);
 
-grant select on "1".finished_projects to anonymous, admin, web_user;
+grant select on "1".finished_projects to anonymous, admins, web_user;
 }
   end
 end

@@ -24,7 +24,7 @@ CREATE VIEW "1".contribution_activities AS (
     ORDER BY pay.paid_at DESC
 );
 
-GRANT SELECT ON "1".contribution_activities TO web_user, anonymous, admin;
+GRANT SELECT ON "1".contribution_activities TO web_user, anonymous, admins;
     SQL
   end
 

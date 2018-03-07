@@ -58,7 +58,7 @@ CREATE VIEW "1".projects AS
      LEFT JOIN public.states s ON ((s.id = c.state_id)));
 SELECT deps_restore_dependencies('1', 'projects');
 
-grant select on "1".projects to admin;
+grant select on "1".projects to admins;
 grant select on "1".projects to web_user;
 grant select on "1".projects to anonymous;
 
@@ -164,7 +164,7 @@ CREATE VIEW "1".projects AS
      LEFT JOIN public.states s ON ((s.id = c.state_id)));
 SELECT deps_restore_dependencies('1', 'projects');
 
-grant select on "1".projects to admin;
+grant select on "1".projects to admins;
 grant select on "1".projects to web_user;
 grant select on "1".projects to anonymous;
 

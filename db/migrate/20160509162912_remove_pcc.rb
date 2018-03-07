@@ -73,7 +73,7 @@ CREATE OR REPLACE FUNCTION public.approve_project_account() RETURNS trigger
 
 
 
-GRANT select ON "1".project_transfers TO admin, web_user;
+GRANT select ON "1".project_transfers TO admins, web_user;
 
 DROP FUNCTION public.pcc_tax(project projects);
     }
@@ -171,7 +171,7 @@ CREATE OR REPLACE FUNCTION public.approve_project_account() RETURNS trigger
         END;
     $$;
 
-GRANT select ON "1".project_transfers TO admin, web_user;
+GRANT select ON "1".project_transfers TO admins, web_user;
     }
   end
 end

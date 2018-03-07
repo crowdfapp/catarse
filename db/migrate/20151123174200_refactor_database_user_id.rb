@@ -66,7 +66,7 @@ CREATE OR REPLACE FUNCTION public.is_owner_or_admin(integer) RETURNS boolean
     AS $_$
               SELECT
                 current_user_id() = $1
-                OR current_user = 'admin';
+                OR current_user = 'admins';
             $_$;
 
 CREATE OR REPLACE FUNCTION public.near_me("1".projects) RETURNS boolean

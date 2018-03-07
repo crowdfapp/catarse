@@ -40,7 +40,7 @@ CREATE OR REPLACE VIEW "1".recommend_projects2user AS
   where us.banned_at IS NULL AND us.deactivated_at IS NULL
   order by t.tanimoto desc;
 
-GRANT SELECT ON TABLE "1".recommend_projects2user TO admin;
+GRANT SELECT ON TABLE "1".recommend_projects2user TO admins;
 GRANT SELECT ON TABLE "1".recommend_projects2user TO web_user;
     }
   end

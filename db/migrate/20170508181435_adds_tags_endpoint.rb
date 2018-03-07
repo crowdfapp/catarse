@@ -6,7 +6,7 @@ class AddsTagsEndpoint < ActiveRecord::Migration
           name,
           slug
       FROM public_tags;
-      GRANT SELECT ON "1".public_tags TO anonymous, web_user, admin;
+      GRANT SELECT ON "1".public_tags TO anonymous, web_user, admins;
     SQL
   end
   def down

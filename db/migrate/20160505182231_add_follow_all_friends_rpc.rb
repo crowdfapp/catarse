@@ -39,8 +39,8 @@ create or replace function "1".follow_all_friends() RETURNS void
             );
     $$;
 
-grant select on public.user_friends to admin, web_user;
-grant execute on function "1".follow_all_friends() to admin, web_user;
+grant select on public.user_friends to admins, web_user;
+grant execute on function "1".follow_all_friends() to admins, web_user;
     }
   end
 

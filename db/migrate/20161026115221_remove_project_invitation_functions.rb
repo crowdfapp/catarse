@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION "1".invite_project_email(data json) RETURNS void
         end;
     $$;
 
-GRANT EXECUTE ON "1".invite_project_email TO admin, web_user;
+GRANT EXECUTE ON "1".invite_project_email TO admins, web_user;
 
     }
   end

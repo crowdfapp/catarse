@@ -24,7 +24,7 @@ WITH NO DATA;
 
 GRANT SELECT ON TABLE "1".project_visitors_per_day TO anonymous;
 GRANT SELECT ON TABLE "1".project_visitors_per_day TO web_user;
-GRANT SELECT ON TABLE "1".project_visitors_per_day TO admin;
+GRANT SELECT ON TABLE "1".project_visitors_per_day TO admins;
     SQL
   end
 

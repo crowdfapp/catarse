@@ -42,7 +42,7 @@ class AddsProjectContributionsSurveysStatus < ActiveRecord::Migration
         LEFT JOIN surveys s ON s.reward_id = c.reward_id
       WHERE (was_confirmed(c.*) AND pa.state <> 'pending'::text OR waiting_payment(pa.*)) AND is_owner_or_admin(p.user_id) OR c.user_id = current_user_id();
       GRANT SELECT ON "1".project_contributions to web_user;
-      GRANT SELECT ON "1".project_contributions to admin;
+      GRANT SELECT ON "1".project_contributions to admins;
     SQL
   end
 
@@ -83,7 +83,7 @@ class AddsProjectContributionsSurveysStatus < ActiveRecord::Migration
         LEFT JOIN surveys s ON s.reward_id = c.reward_id
       WHERE (was_confirmed(c.*) AND pa.state <> 'pending'::text OR waiting_payment(pa.*)) AND is_owner_or_admin(p.user_id) OR c.user_id = current_user_id();
       GRANT SELECT ON "1".project_contributions to web_user;
-      GRANT SELECT ON "1".project_contributions to admin;
+      GRANT SELECT ON "1".project_contributions to admins;
     SQL
   end
 end

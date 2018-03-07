@@ -96,7 +96,7 @@ class AddProjectPostsDetailsView < ActiveRecord::Migration
           p.sent_to_analysis_at,
           pt.total_payment_service_fee;
 
-      grant select on "1".project_details to admin;
+      grant select on "1".project_details to admins;
       grant select on "1".project_details to web_user;
       grant select on "1".project_details to anonymous;
 
@@ -117,7 +117,7 @@ class AddProjectPostsDetailsView < ActiveRecord::Migration
         from project_posts pp
         join projects p on p.id = pp.project_id;
 
-      grant select on "1".project_posts_details to admin;
+      grant select on "1".project_posts_details to admins;
       grant select on "1".project_posts_details to web_user;
       grant select on "1".project_posts_details to anonymous;
     SQL
@@ -189,7 +189,7 @@ class AddProjectPostsDetailsView < ActiveRecord::Migration
           p.sent_to_analysis_at,
           pt.total_payment_service_fee;
 
-      grant select on "1".project_details to admin;
+      grant select on "1".project_details to admins;
       grant select on "1".project_details to web_user;
       grant select on "1".project_details to anonymous;
 

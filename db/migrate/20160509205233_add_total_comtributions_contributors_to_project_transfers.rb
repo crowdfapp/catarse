@@ -21,7 +21,7 @@ CREATE VIEW "1".project_transfers AS
      LEFT JOIN "1".project_totals pt ON ((pt.project_id = p.id)))
   WHERE (public.is_owner_or_admin(p.user_id) OR ("current_user"() = 'catarse'::name));
 
-GRANT select ON "1".project_transfers TO admin, web_user;
+GRANT select ON "1".project_transfers TO admins, web_user;
     }
   end
 
@@ -45,7 +45,7 @@ CREATE VIEW "1".project_transfers AS
      LEFT JOIN "1".project_totals pt ON ((pt.project_id = p.id)))
   WHERE (public.is_owner_or_admin(p.user_id) OR ("current_user"() = 'catarse'::name));
 
-GRANT select ON "1".project_transfers TO admin, web_user;
+GRANT select ON "1".project_transfers TO admins, web_user;
     }
   end
 end

@@ -24,7 +24,7 @@ class CreateRewardDetails < ActiveRecord::Migration
       r.paid_count,
       r.waiting_payment_count
      FROM rewards r;
-    GRANT select ON ALL TABLES IN SCHEMA "1" TO admin;
+    GRANT select ON ALL TABLES IN SCHEMA "1" TO admins;
     SQL
   end
 

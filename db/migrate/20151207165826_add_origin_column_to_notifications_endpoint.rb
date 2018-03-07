@@ -31,7 +31,7 @@ class AddOriginColumnToNotificationsEndpoint < ActiveRecord::Migration
             JOIN public.projects p ON p.id = co.project_id
     ) n;
 
-    GRANT SELECT ON "1".notifications TO admin;
+    GRANT SELECT ON "1".notifications to admins;
     SQL
   end
 
@@ -57,7 +57,7 @@ class AddOriginColumnToNotificationsEndpoint < ActiveRecord::Migration
         SELECT user_id, template_name, created_at, sent_at, deliver_at FROM contribution_notifications
     ) n;
 
-    GRANT SELECT ON "1".notifications TO admin;
+    GRANT SELECT ON "1".notifications to admins;
     SQL
   end
 end

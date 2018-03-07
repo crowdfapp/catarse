@@ -53,11 +53,11 @@ class AddDeleteProjectsEndpoint < ActiveRecord::Migration
               end;
             $$;
 
-      grant execute on function "1".delete_project(integer) to admin, web_user;
+      grant execute on function "1".delete_project(integer) to admins, web_user;
 
-      grant insert, select, update on public.project_transitions to admin;
+      grant insert, select, update on public.project_transitions to admins;
       grant insert, select, update on public.project_transitions to web_user;
-      grant update on public.projects to admin;
+      grant update on public.projects to admins;
       grant update on public.projects to web_user;
     SQL
   end

@@ -20,7 +20,7 @@ class AddUserFollowersApi < ActiveRecord::Migration
             join public.users as f on f.id = uf.user_id
             where public.is_owner_or_admin(uf.follow_id) and f.deactivated_at is null;
 
-        GRANT SELECT, INSERT, DELETE ON "1".user_followers TO admin, web_user;
+        GRANT SELECT, INSERT, DELETE ON "1".user_followers TO admins, web_user;
     SQL
   end
 end

@@ -96,14 +96,14 @@ CREATE TRIGGER solve_error_reason
     INSTEAD OF DELETE ON "1".project_account_errors
     FOR EACH ROW EXECUTE PROCEDURE public.solve_error_reason();
 
-GRANT SELECT, INSERT ON "1".project_account_errors TO admin, web_user;
-GRANT DELETE ON "1".project_account_errors TO admin;
+GRANT SELECT, INSERT ON "1".project_account_errors TO admins, web_user;
+GRANT DELETE ON "1".project_account_errors to admins;
 
-GRANT SELECT, INSERT ON public.project_account_errors TO admin, web_user;
-GRANT UPDATE ON public.project_account_errors TO admin;
-GRANT DELETE ON public.project_account_errors TO admin, web_user;
+GRANT SELECT, INSERT ON public.project_account_errors TO admins, web_user;
+GRANT UPDATE ON public.project_account_errors to admins;
+GRANT DELETE ON public.project_account_errors TO admins, web_user;
 
-GRANT USAGE ON SEQUENCE project_account_errors_id_seq TO admin, web_user;
+GRANT USAGE ON SEQUENCE project_account_errors_id_seq TO admins, web_user;
     SQL
     end
 
@@ -113,8 +113,8 @@ DROP VIEW "1".project_account_errors;
 DROP FUNCTION public.add_error_reason();
 DROP FUNCTION public.solve_error_reason();
 
-REVOKE SELECT, UPDATE, INSERT ON public.project_account_errors FROM admin, web_user;
-REVOKE USAGE ON SEQUENCE project_account_errors_id_seq FROM admin, web_user;
+REVOKE SELECT, UPDATE, INSERT ON public.project_account_errors FROM admins, web_user;
+REVOKE USAGE ON SEQUENCE project_account_errors_id_seq FROM admins, web_user;
       SQL
     end
 end

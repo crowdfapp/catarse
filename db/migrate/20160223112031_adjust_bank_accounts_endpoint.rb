@@ -18,7 +18,7 @@ CREATE OR REPlACE VIEW "1".bank_accounts AS
      JOIN public.banks b ON b.id = ba.bank_id
   WHERE public.is_owner_or_admin(ba.user_id);
 
-GRANT SELECT ON "1".bank_accounts TO admin, web_user;
+GRANT SELECT ON "1".bank_accounts TO admins, web_user;
     SQL
   end
 
@@ -52,7 +52,7 @@ CREATE VIEW "1".bank_accounts AS
      LEFT JOIN public.banks b ON ((b.id = pa.bank_id)))
   WHERE public.is_owner_or_admin(pac.user_id);
 
-GRANT SELECT ON "1".bank_accounts TO admin, web_user;
+GRANT SELECT ON "1".bank_accounts TO admins, web_user;
     SQL
   end
 end

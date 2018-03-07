@@ -7,7 +7,7 @@ class AddAnsweredCountRpc < ActiveRecord::Migration
       select count(*) from contributions where reward_id = $1 and survey_answered_at is not null;
       $$;
 
-      grant execute on function "1".answered_survey_count(integer) to admin, web_user, anonymous;
+      grant execute on function "1".answered_survey_count(integer) to admins, web_user, anonymous;
 
       create or replace view "1".user_contributions as
 SELECT pa.id,

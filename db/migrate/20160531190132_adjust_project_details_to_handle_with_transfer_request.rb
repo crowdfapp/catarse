@@ -54,7 +54,7 @@ CREATE OR REPLACE VIEW "1"."project_details" AS
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
     (p.state = 'successful' AND p.expires_at::date >= '2016-06-06') AS can_request_transfer,
-    ("current_user"() = 'admin'::name) AS is_admin_role
+    ("current_user"() = 'admins'::name) AS is_admin_role
    FROM (((((((public.projects p
      JOIN public.categories c ON ((c.id = p.category_id)))
      JOIN public.users u ON ((u.id = p.user_id)))
@@ -64,7 +64,7 @@ CREATE OR REPLACE VIEW "1"."project_details" AS
      LEFT JOIN public.states st ON ((st.id = ct.state_id)))
      LEFT JOIN public.project_reminders pr ON ((pr.project_id = p.id)))
   GROUP BY p.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.paid_pledged, pt.total_contributions, p.state, p.expires_at, pt.total_payment_service_fee, pt.total_contributors;
-grant select on "1".project_details to admin, web_user, anonymous;
+grant select on "1".project_details to admins, web_user, anonymous;
     }
   end
 
@@ -122,7 +122,7 @@ CREATE OR REPLACE VIEW "1"."project_details" AS
     user_signed_in() AS user_signed_in,
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    ("current_user"() = 'admin'::name) AS is_admin_role
+    ("current_user"() = 'admins'::name) AS is_admin_role
    FROM (((((((public.projects p
      JOIN public.categories c ON ((c.id = p.category_id)))
      JOIN public.users u ON ((u.id = p.user_id)))
@@ -132,7 +132,7 @@ CREATE OR REPLACE VIEW "1"."project_details" AS
      LEFT JOIN public.states st ON ((st.id = ct.state_id)))
      LEFT JOIN public.project_reminders pr ON ((pr.project_id = p.id)))
   GROUP BY p.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.paid_pledged, pt.total_contributions, p.state, p.expires_at, pt.total_payment_service_fee, pt.total_contributors;
-grant select on "1".project_details to admin, web_user, anonymous;
+grant select on "1".project_details to admins, web_user, anonymous;
     }
   end
 end

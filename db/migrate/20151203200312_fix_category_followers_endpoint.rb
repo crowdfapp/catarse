@@ -45,8 +45,8 @@ CREATE TRIGGER delete_category_followers INSTEAD OF DELETE
 ON "1".category_followers FOR EACH ROW 
 EXECUTE PROCEDURE public.delete_category_followers();
 
-GRANT SELECT,INSERT, DELETE ON public.category_followers TO admin, web_user;
-GRANT USAGE ON SEQUENCE category_followers_id_seq TO admin, web_user;
+GRANT SELECT,INSERT, DELETE ON public.category_followers TO admins, web_user;
+GRANT USAGE ON SEQUENCE category_followers_id_seq TO admins, web_user;
     SQL
   end
 

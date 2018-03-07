@@ -19,7 +19,7 @@ class AddIsFollowToContributors < ActiveRecord::Migration
           GROUP BY u.id, c.project_id, ut.total_contributed_projects, ut.total_published_projects;
 
 
-          GRANT SELECT ON "1".contributors TO admin, anonymous, web_user;
+          GRANT SELECT ON "1".contributors TO admins, anonymous, web_user;
             }
   end
 end

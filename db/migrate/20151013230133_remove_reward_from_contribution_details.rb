@@ -51,7 +51,7 @@ CREATE VIEW "1".contribution_details AS
 
 CREATE TRIGGER update_from_details_to_contributions INSTEAD OF UPDATE ON "1".contribution_details FOR EACH ROW EXECUTE PROCEDURE public.update_from_details_to_contributions();
 
-GRANT SELECT,UPDATE ON TABLE "1".contribution_details TO admin;
+GRANT SELECT,UPDATE ON TABLE "1".contribution_details to admins;
     SQL
   end
 
@@ -107,7 +107,7 @@ CREATE VIEW "1".contribution_details AS
 
 CREATE TRIGGER update_from_details_to_contributions INSTEAD OF UPDATE ON "1".contribution_details FOR EACH ROW EXECUTE PROCEDURE public.update_from_details_to_contributions();
 
-GRANT SELECT,UPDATE ON TABLE "1".contribution_details TO admin;
+GRANT SELECT,UPDATE ON TABLE "1".contribution_details to admins;
     SQL
   end
 end

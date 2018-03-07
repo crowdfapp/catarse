@@ -43,7 +43,7 @@ SELECT p.id AS project_id,
 
 CREATE UNIQUE INDEX finished_project_uidx ON "1".finished_projects(project_id);
 
-grant select on "1".finished_projects to anonymous, admin, web_user;
+grant select on "1".finished_projects to anonymous, admins, web_user;
   SQL
   end
 end

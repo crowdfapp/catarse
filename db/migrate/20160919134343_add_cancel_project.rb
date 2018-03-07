@@ -21,9 +21,9 @@ class AddCancelProject < ActiveRecord::Migration
               end;
             $$;
 
-      grant execute on function "1".cancel_project(integer) to admin, web_user;
-      grant ALL  on rdevents to admin, web_user;
-      grant all on sequence rdevents_id_seq to admin, web_user;
+      grant execute on function "1".cancel_project(integer) to admins, web_user;
+      grant ALL  on rdevents to admins, web_user;
+      grant all on sequence rdevents_id_seq to admins, web_user;
 
     SQL
   end

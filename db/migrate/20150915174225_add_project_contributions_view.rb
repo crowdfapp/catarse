@@ -25,7 +25,7 @@ class AddProjectContributionsView < ActiveRecord::Migration
         left join "1".user_totals ut on ut.user_id = u.id
         where (c.was_confirmed or pa.waiting_payment) and (not c.anonymous or public.is_owner_or_admin(p.user_id)); -- or c.waiting_payment;
 
-      grant select on "1".project_contributions to admin;
+      grant select on "1".project_contributions to admins;
       grant select on "1".project_contributions to web_user;
       grant select on "1".project_contributions to anonymous;
     SQL

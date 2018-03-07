@@ -32,11 +32,11 @@ create trigger withdraw_balance instead of insert on "1".balance_transfers
     for each row execute procedure withdraw_balance();
 
 
-GRANT SELECT, INSERT ON public.balance_transfers TO admin, web_user;
-GRANT SELECT, INSERT ON "1".balance_transfers TO admin, web_user;
-GRANT USAGE ON SEQUENCE balance_transfers_id_seq TO admin, web_user;
-GRANT SELECT, INSERT ON public.balance_transactions TO admin, web_user;
-GRANT USAGE ON SEQUENCE balance_transactions_id_seq TO admin, web_user;
+GRANT SELECT, INSERT ON public.balance_transfers TO admins, web_user;
+GRANT SELECT, INSERT ON "1".balance_transfers TO admins, web_user;
+GRANT USAGE ON SEQUENCE balance_transfers_id_seq TO admins, web_user;
+GRANT SELECT, INSERT ON public.balance_transactions TO admins, web_user;
+GRANT USAGE ON SEQUENCE balance_transactions_id_seq TO admins, web_user;
 
 drop trigger approve_project_account on "1".project_accounts;
 }

@@ -62,7 +62,7 @@ class AddReminderHandlersToProjectDetails < ActiveRecord::Migration
           public.user_signed_in() as user_signed_in,
           public.current_user_already_in_reminder(p) as in_reminder,
           count(pp.*) as total_posts,
-          (current_user = 'admin') as is_admin_role
+          (current_user = 'admins') as is_admin_role
         from projects p
         join categories c on c.id = p.category_id
         join users u on u.id = p.user_id
@@ -89,7 +89,7 @@ class AddReminderHandlersToProjectDetails < ActiveRecord::Migration
           p.sent_to_analysis_at,
           pt.total_payment_service_fee;
 
-      grant select on "1".project_details to admin;
+      grant select on "1".project_details to admins;
       grant select on "1".project_details to web_user;
       grant select on "1".project_details to anonymous;
 
@@ -102,16 +102,16 @@ class AddReminderHandlersToProjectDetails < ActiveRecord::Migration
         and public.is_owner_or_admin(pn.user_id);
 
       grant select, insert, delete on "1".project_reminders to web_user;
-      grant select, insert, delete on "1".project_reminders to admin;
+      grant select, insert, delete on "1".project_reminders to admins;
 
       grant select, insert, delete on public.project_notifications to web_user;
-      grant select, insert, delete on public.project_notifications to admin;
+      grant select, insert, delete on public.project_notifications to admins;
 
-      grant usage on public.project_notifications_id_seq to admin;
+      grant usage on public.project_notifications_id_seq to admins;
       grant usage on public.project_notifications_id_seq to web_user;
 
       grant select on public.projects to web_user;
-      grant select on public.projects to admin;
+      grant select on public.projects to admins;
 
 
       create or replace function public.insert_project_reminder() returns trigger
@@ -165,13 +165,13 @@ class AddReminderHandlersToProjectDetails < ActiveRecord::Migration
   def down
     execute <<-SQL
       revoke select, insert, delete on public.project_notifications from web_user;
-      revoke select, insert, delete on public.project_notifications from admin;
+      revoke select, insert, delete on public.project_notifications from admins;
 
-      revoke usage on public.project_notifications_id_seq from admin;
+      revoke usage on public.project_notifications_id_seq from admins;
       revoke usage on public.project_notifications_id_seq from web_user;
 
       revoke select on public.projects from web_user;
-      revoke select on public.projects from admin;
+      revoke select on public.projects from admins;
 
       drop view if exists "1".project_reminders;
       drop function if exists public.insert_project_reminder() cascade;
@@ -249,7 +249,7 @@ class AddReminderHandlersToProjectDetails < ActiveRecord::Migration
           p.sent_to_analysis_at,
           pt.total_payment_service_fee;
 
-      grant select on "1".project_details to admin;
+      grant select on "1".project_details to admins;
       grant select on "1".project_details to web_user;
       grant select on "1".project_details to anonymous;
     SQL

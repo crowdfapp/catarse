@@ -53,7 +53,7 @@ CREATE VIEW "1".project_details AS
     user_signed_in() AS user_signed_in,
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    "current_user"() = 'admin'::name AS is_admin_role
+    "current_user"() = 'admins'::name AS is_admin_role
    FROM projects p
      JOIN categories c ON c.id = p.category_id
      JOIN users u ON u.id = p.user_id
@@ -67,7 +67,7 @@ CREATE VIEW "1".project_details AS
 
 select deps_restore_dependencies('1', 'project_details');
 
-grant select on "1".project_details to admin;
+grant select on "1".project_details to admins;
 grant select on "1".project_details to web_user;
 grant select on "1".project_details to anonymous;
     SQL
@@ -121,7 +121,7 @@ CREATE VIEW "1".project_details AS
     user_signed_in() AS user_signed_in,
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    "current_user"() = 'admin'::name AS is_admin_role
+    "current_user"() = 'admins'::name AS is_admin_role
    FROM projects p
      JOIN categories c ON c.id = p.category_id
      JOIN users u ON u.id = p.user_id
@@ -135,7 +135,7 @@ CREATE VIEW "1".project_details AS
 
 select deps_restore_dependencies('1', 'project_details');
 
-grant select on "1".project_details to admin;
+grant select on "1".project_details to admins;
 grant select on "1".project_details to web_user;
 grant select on "1".project_details to anonymous;
 

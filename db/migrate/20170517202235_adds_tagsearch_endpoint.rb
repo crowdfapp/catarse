@@ -16,7 +16,7 @@ class AddsTagsearchEndpoint < ActiveRecord::Migration
         LIMIT COALESCE(LEAST(count,50), 10) --10 is default value, 50 is the max value.
       $BODY$
       LANGUAGE sql STABLE;
-      GRANT EXECUTE ON FUNCTION "1".tag_search(text,integer) TO anonymous, web_user, admin;
+      GRANT EXECUTE ON FUNCTION "1".tag_search(text,integer) TO anonymous, web_user, admins;
     SQL
   end
   def down

@@ -64,7 +64,7 @@ CREATE OR REPLACE VIEW "1".projects AS
      LEFT JOIN flexible_projects fp ON ((fp.project_id = p.id)));
 SELECT deps_restore_dependencies('1', 'projects');
 
-GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admin;
+GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admins;
 
 CREATE OR REPLACE FUNCTION public.near_me("1".projects)
  RETURNS boolean
@@ -167,7 +167,7 @@ CREATE OR REPLACE VIEW "1".projects AS
      LEFT JOIN flexible_projects fp ON ((fp.project_id = p.id)));
 SELECT deps_restore_dependencies('1', 'projects');
 
-GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admin;
+GRANT SELECT ON TABLE "1".projects TO anonymous, web_user, admins;
 
 CREATE OR REPLACE FUNCTION public.near_me("1".projects)
  RETURNS boolean

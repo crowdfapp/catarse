@@ -20,7 +20,7 @@ class FixViewProjectDetailContributionPerDay < ActiveRecord::Migration
 
       GRANT SELECT ON "1".project_contributions_per_day TO anonymous;
       GRANT SELECT ON "1".project_contributions_per_day TO web_user;
-      GRANT SELECT ON "1".project_contributions_per_day TO ADMIN;
+      GRANT SELECT ON "1".project_contributions_per_day TO admins;
     SQL
   end
 
@@ -46,7 +46,7 @@ class FixViewProjectDetailContributionPerDay < ActiveRecord::Migration
 
       grant select on "1".project_contributions_per_day to anonymous;
       grant select on "1".project_contributions_per_day to web_user;
-      grant select on "1".project_contributions_per_day to admin;
+      grant select on "1".project_contributions_per_day to admins;
     SQL
   end
 end

@@ -49,7 +49,7 @@ class AddFlexIdToProjectDetails < ActiveRecord::Migration
     user_signed_in() AS user_signed_in,
     current_user_already_in_reminder(p.*) AS in_reminder,
     count(pp.*) AS total_posts,
-    "current_user"() = 'admin'::name AS is_admin_role
+    "current_user"() = 'admins'::name AS is_admin_role
    FROM projects p
      JOIN categories c ON c.id = p.category_id
      JOIN users u ON u.id = p.user_id
@@ -62,6 +62,6 @@ class AddFlexIdToProjectDetails < ActiveRecord::Migration
   GROUP BY p.id, fp.id, c.id, u.id, c.name_pt, ct.name, u.address_city, st.acronym, u.address_state, st.name, pt.progress, pt.pledged, pt.total_contributions, p.state, p.expires_at, pt.total_payment_service_fee, fp.state, pt.total_contributors; 
     
   SQL
-  execute "GRANT SELECT ON \"1\".project_details TO admin, anonymous, web_user;"
+  execute "GRANT SELECT ON \"1\".project_details TO admins, anonymous, web_user;"
   end
 end

@@ -10,7 +10,7 @@ class CreateCategoriesEndpoint < ActiveRecord::Migration
         FROM categories c
         WHERE
         exists(select true from projects p where p.category_id = c.id);
-    grant select on "1".categories to admin;
+    grant select on "1".categories to admins;
     grant select on "1".categories to web_user;
     grant select on "1".categories to anonymous;
     SQL

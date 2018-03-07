@@ -19,21 +19,21 @@ class CreateDirectMessagesView < ActiveRecord::Migration
         for each row execute procedure public.insert_direct_message();
       grant insert, select on "1".direct_messages to anonymous;
       grant insert, select on "1".direct_messages to web_user;
-      grant insert, select on "1".direct_messages to admin;
+      grant insert, select on "1".direct_messages to admins;
       grant insert, select on public.direct_messages to anonymous;
       grant insert, select on public.direct_messages to web_user;
-      grant insert, select on public.direct_messages to admin;
+      grant insert, select on public.direct_messages to admins;
 
       grant insert, select on public.direct_message_notifications to anonymous;
       grant insert, select on public.direct_message_notifications to web_user;
-      grant insert, select on public.direct_message_notifications to admin;
+      grant insert, select on public.direct_message_notifications to admins;
 
       grant usage on sequence direct_messages_id_seq to anonymous;
       grant usage on sequence direct_messages_id_seq to web_user;
-      grant usage on sequence direct_messages_id_seq to admin;
+      grant usage on sequence direct_messages_id_seq to admins;
       grant usage on sequence direct_message_notifications_id_seq to anonymous;
       grant usage on sequence direct_message_notifications_id_seq to web_user;
-      grant usage on sequence direct_message_notifications_id_seq to admin;
+      grant usage on sequence direct_message_notifications_id_seq to admins;
     SQL
   end
 end

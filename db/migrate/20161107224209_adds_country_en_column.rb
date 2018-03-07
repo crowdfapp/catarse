@@ -5,7 +5,7 @@ class AddsCountryEnColumn < ActiveRecord::Migration
     DROP MATERIALIZED VIEW "1".countries;
     CREATE MATERIALIZED VIEW "1".countries AS
       SELECT id, name, name_en FROM countries;
-    GRANT SELECT ON "1".countries to admin, web_user, anonymous;
+    GRANT SELECT ON "1".countries to admins, web_user, anonymous;
     SQL
   end
 end

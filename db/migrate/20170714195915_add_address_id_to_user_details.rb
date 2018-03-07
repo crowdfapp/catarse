@@ -42,7 +42,7 @@ class AddAddressIdToUserDetails < ActiveRecord::Migration
     u.subscribed_to_project_posts,
     u.subscribed_to_new_followers,
     u.subscribed_to_friends_contributions,
-    "current_user"() = 'admin'::name AS is_admin,
+    "current_user"() = 'admins'::name AS is_admin,
     u.permalink,
         CASE
             WHEN is_owner_or_admin(u.id) THEN email_active(u.*)
@@ -65,12 +65,12 @@ class AddAddressIdToUserDetails < ActiveRecord::Migration
             WHEN is_owner_or_admin(u.id) THEN u.account_type
             ELSE NULL::text
         END AS account_type,
-    "current_user"() = 'admin'::name AS is_admin_role
+    "current_user"() = 'admins'::name AS is_admin_role
    FROM users u
      LEFT JOIN "1".user_totals ut ON ut.user_id = u.id
      LEFT JOIN addresses add ON add.id = u.address_id;
 
-       GRANT SELECT ON "1".user_details to admin;
+       GRANT SELECT ON "1".user_details to admins;
        GRANT SELECT ON "1".user_details to web_user;
        GRANT SELECT ON "1".user_details to anonymous;
     SQL

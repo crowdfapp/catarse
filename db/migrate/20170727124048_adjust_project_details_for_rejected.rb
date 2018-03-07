@@ -53,23 +53,23 @@ CREATE OR REPLACE VIEW "1"."project_details" AS
     current_user_already_in_reminder(p.*) AS in_reminder,
     posts_size.count AS total_posts,
     (((p.state)::text = 'successful'::text) AND ((p.expires_at)::date >= '2016-06-06'::date)) AS can_request_transfer,
-    ("current_user"() = 'admin'::name) AS is_admin_role,
+    ("current_user"() = 'admins'::name) AS is_admin_role,
     (EXISTS ( SELECT true AS bool
            FROM (contributions c_1
              JOIN user_follows uf ON ((uf.follow_id = c_1.user_id)))
           WHERE ((is_confirmed(c_1.*) AND (uf.user_id = current_user_id())) AND (c_1.project_id = p.id)))) AS contributed_by_friends,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN NULLIF(btrim((array_agg(DISTINCT admin_tags_lateral.tag_list))::text, '{}'::text), 'NULL'::text)
+            WHEN ("current_user"() = 'admins'::name) THEN NULLIF(btrim((array_agg(DISTINCT admin_tags_lateral.tag_list))::text, '{}'::text), 'NULL'::text)
             ELSE NULL::text
         END AS admin_tag_list,
     NULLIF(btrim((array_agg(DISTINCT tags_lateral.tag_list))::text, '{}'::text), 'NULL'::text) AS tag_list,
     ct.id AS city_id,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN p.admin_notes
+            WHEN ("current_user"() = 'admins'::name) THEN p.admin_notes
             ELSE NULL::text
         END AS admin_notes,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN p.service_fee
+            WHEN ("current_user"() = 'admins'::name) THEN p.service_fee
             ELSE NULL::numeric
         END AS service_fee,
     has_cancelation_request(p.*) AS has_cancelation_request,
@@ -152,23 +152,23 @@ CREATE OR REPLACE VIEW "1"."project_details" AS
     current_user_already_in_reminder(p.*) AS in_reminder,
     posts_size.count AS total_posts,
     (((p.state)::text = 'successful'::text) AND ((p.expires_at)::date >= '2016-06-06'::date)) AS can_request_transfer,
-    ("current_user"() = 'admin'::name) AS is_admin_role,
+    ("current_user"() = 'admins'::name) AS is_admin_role,
     (EXISTS ( SELECT true AS bool
            FROM (contributions c_1
              JOIN user_follows uf ON ((uf.follow_id = c_1.user_id)))
           WHERE ((is_confirmed(c_1.*) AND (uf.user_id = current_user_id())) AND (c_1.project_id = p.id)))) AS contributed_by_friends,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN NULLIF(btrim((array_agg(DISTINCT admin_tags_lateral.tag_list))::text, '{}'::text), 'NULL'::text)
+            WHEN ("current_user"() = 'admins'::name) THEN NULLIF(btrim((array_agg(DISTINCT admin_tags_lateral.tag_list))::text, '{}'::text), 'NULL'::text)
             ELSE NULL::text
         END AS admin_tag_list,
     NULLIF(btrim((array_agg(DISTINCT tags_lateral.tag_list))::text, '{}'::text), 'NULL'::text) AS tag_list,
     ct.id AS city_id,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN p.admin_notes
+            WHEN ("current_user"() = 'admins'::name) THEN p.admin_notes
             ELSE NULL::text
         END AS admin_notes,
         CASE
-            WHEN ("current_user"() = 'admin'::name) THEN p.service_fee
+            WHEN ("current_user"() = 'admins'::name) THEN p.service_fee
             ELSE NULL::numeric
         END AS service_fee,
     has_cancelation_request(p.*) AS has_cancelation_request,

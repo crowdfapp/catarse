@@ -21,7 +21,7 @@ class ViewProjectDetailContributionPerDay < ActiveRecord::Migration
 
       grant select on "1".project_contributions_per_day to anonymous;
       grant select on "1".project_contributions_per_day to web_user;
-      grant select on "1".project_contributions_per_day to admin;
+      grant select on "1".project_contributions_per_day to admins;
 
     SQL
   end

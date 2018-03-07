@@ -31,8 +31,8 @@ CREATE OR REPLACE VIEW "1".balance_transfers AS
    FROM public.balance_transfers bt
   WHERE public.is_owner_or_admin(bt.user_id);
 
-GRANT SELECT ON public.balance_transfer_transitions TO web_user, admin;
-GRANT SELECT ON "1".balance_transfer_transitions TO web_user, admin;
+GRANT SELECT ON public.balance_transfer_transitions TO web_user, admins;
+GRANT SELECT ON "1".balance_transfer_transitions TO web_user, admins;
     SQL
   end
 

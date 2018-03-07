@@ -49,7 +49,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
     ELSE u.subscribed_to_new_followers END) as subscribed_to_new_followers,
     (CASE WHEN u.deactivated_at is not null AND NOT is_owner_or_admin(u.id) THEN false
     ELSE u.subscribed_to_friends_contributions END) as subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink,
         CASE
             WHEN is_owner_or_admin(u.id) THEN email_active(u.*)
@@ -72,7 +72,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
             WHEN is_owner_or_admin(u.id) THEN u.account_type
             ELSE NULL::text
         END AS account_type,
-    ("current_user"() = 'admin'::name) AS is_admin_role
+    ("current_user"() = 'admins'::name) AS is_admin_role
    FROM ((users u
      LEFT JOIN "1".user_totals ut ON ((ut.user_id = u.id)))
      LEFT JOIN addresses add ON ((add.id = u.address_id)));
@@ -121,7 +121,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
     u.subscribed_to_project_posts,
     u.subscribed_to_new_followers,
     u.subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink,
         CASE
             WHEN is_owner_or_admin(u.id) THEN email_active(u.*)
@@ -144,7 +144,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
             WHEN is_owner_or_admin(u.id) THEN u.account_type
             ELSE NULL::text
         END AS account_type,
-    ("current_user"() = 'admin'::name) AS is_admin_role
+    ("current_user"() = 'admins'::name) AS is_admin_role
    FROM ((users u
      LEFT JOIN user_totals ut ON ((ut.user_id = u.id)))
      LEFT JOIN addresses add ON ((add.id = u.address_id)));

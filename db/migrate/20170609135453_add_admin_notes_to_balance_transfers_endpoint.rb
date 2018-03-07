@@ -18,7 +18,7 @@ CREATE OR REPLACE VIEW "1"."balance_transfers" AS
     u.name AS user_name,
     u.public_name AS user_public_name,
     u.email AS user_email,
-    (case when current_user = 'admin' then admin_notes else null::text end) AS admin_notes
+    (case when current_user = 'admins' then admin_notes else null::text end) AS admin_notes
    FROM (((balance_transfers bt
      JOIN users u ON ((u.id = bt.user_id)))
      LEFT JOIN balance_transfer_transitions btt ON (((btt.balance_transfer_id = bt.id) AND btt.most_recent)))

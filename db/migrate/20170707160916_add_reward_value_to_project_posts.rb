@@ -22,7 +22,7 @@ class AddRewardValueToProjectPosts < ActiveRecord::Migration
    FROM project_posts pp
       LEFT JOIN rewards r on r.id  = pp.reward_id
      JOIN projects p ON p.id = pp.project_id;
-      grant select on "1".project_posts_details to admin;
+      grant select on "1".project_posts_details to admins;
       grant select on "1".project_posts_details to web_user;
       grant select on "1".project_posts_details to anonymous;
      SQL

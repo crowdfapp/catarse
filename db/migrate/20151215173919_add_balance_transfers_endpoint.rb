@@ -12,7 +12,7 @@ CREATE OR REPLACE VIEW "1".balance_transfers AS
     FROM public.balance_transfers bt
     WHERE public.is_owner_or_admin(bt.user_id);
 
-GRANT SELECT ON "1".balance_transfers TO admin, web_user;
+GRANT SELECT ON "1".balance_transfers TO admins, web_user;
     SQL
   end
 

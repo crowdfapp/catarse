@@ -38,12 +38,12 @@ CREATE OR REPLACE FUNCTION public.insert_balance_transfer() RETURNS TRIGGER
 CREATE TRIGGER insert_balance_transfer INSTEAD OF INSERT ON "1".balance_transfers
     FOR EACH ROW EXECUTE PROCEDURE public.insert_balance_transfer();
 
-GRANT SELECT, INSERT ON public.balance_transfers TO admin, web_user;
-GRANT SELECT, INSERT ON "1".balance_transfers TO admin, web_user;
-GRANT USAGE ON SEQUENCE balance_transfers_id_seq TO admin, web_user;
+GRANT SELECT, INSERT ON public.balance_transfers TO admins, web_user;
+GRANT SELECT, INSERT ON "1".balance_transfers TO admins, web_user;
+GRANT USAGE ON SEQUENCE balance_transfers_id_seq TO admins, web_user;
 
-GRANT SELECT, INSERT ON public.balance_transactions TO admin, web_user;
-GRANT USAGE ON SEQUENCE balance_transactions_id_seq TO admin, web_user;
+GRANT SELECT, INSERT ON public.balance_transactions TO admins, web_user;
+GRANT USAGE ON SEQUENCE balance_transactions_id_seq TO admins, web_user;
     SQL
   end
 

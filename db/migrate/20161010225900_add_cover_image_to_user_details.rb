@@ -46,7 +46,7 @@ class AddCoverImageToUserDetails < ActiveRecord::Migration
        FROM users u
          LEFT JOIN "1".user_totals ut ON ut.user_id = u.id;
 
-       GRANT SELECT ON "1".user_details to admin;
+       GRANT SELECT ON "1".user_details to admins;
        GRANT SELECT ON "1".user_details to web_user;
        GRANT SELECT ON "1".user_details to anonymous;
     SQL
@@ -84,7 +84,7 @@ class AddCoverImageToUserDetails < ActiveRecord::Migration
        FROM users u
          LEFT JOIN "1".user_totals ut ON ut.user_id = u.id;
 
-       GRANT SELECT ON "1".user_details to admin;
+       GRANT SELECT ON "1".user_details to admins;
        GRANT SELECT ON "1".user_details to web_user;
        GRANT SELECT ON "1".user_details to anonymous;
     SQL

@@ -14,8 +14,8 @@ class CreateUsersView < ActiveRecord::Migration
           u.deactivated_at,
           u.full_text_index
          FROM users u;
-      GRANT SELECT ON "1".users TO admin;
-      GRANT UPDATE (deactivated_at) ON "1".users, public.users TO admin;
+      GRANT SELECT ON "1".users to admins;
+      GRANT UPDATE (deactivated_at) ON "1".users, public.users to admins;
     SQL
   end
 

@@ -6,7 +6,7 @@ class FixIsOwnerOrAdmin < ActiveRecord::Migration
           AS $_$
               SELECT
                 current_setting('user_vars.user_id') = $1::text
-                OR current_user = 'admin';
+                OR current_user = 'admins';
             $_$;
     SQL
   end
@@ -18,7 +18,7 @@ class FixIsOwnerOrAdmin < ActiveRecord::Migration
           AS $_$
               SELECT
                 current_setting('user_vars.user_id') = $1::text
-                OR current_user = 'admin';
+                OR current_user = 'admins';
             $_$;
     SQL
   end

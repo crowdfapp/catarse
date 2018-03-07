@@ -42,7 +42,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
     u.subscribed_to_project_posts,
     u.subscribed_to_new_followers,
     u.subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink,
     (CASE
         WHEN is_owner_or_admin(u.id) THEN email_active(u.*)
@@ -100,7 +100,7 @@ CREATE OR REPLACE VIEW "1"."user_details" AS
     u.subscribed_to_project_posts,
     u.subscribed_to_new_followers,
     u.subscribed_to_friends_contributions,
-    ("current_user"() = 'admin'::name) AS is_admin,
+    ("current_user"() = 'admins'::name) AS is_admin,
     u.permalink,
     (CASE
         WHEN is_owner_or_admin(u.id) THEN email_active(u.*)

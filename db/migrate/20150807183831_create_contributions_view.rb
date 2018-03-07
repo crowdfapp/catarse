@@ -11,7 +11,7 @@ class CreateContributionsView < ActiveRecord::Migration
       c.created_at
     FROM
       public.contributions c;
-    GRANT ALL ON "1".contributions TO admin;
+    GRANT ALL ON "1".contributions TO admins;
     SQL
   end
 

@@ -56,7 +56,7 @@ class FixUserTotals < ActiveRecord::Migration
         ORDER BY u.name;
 
       grant select on "1".team_members to anonymous;
-      grant select on "1".team_members to admin;
+      grant select on "1".team_members to admins;
       grant select on "1".team_members to web_user;
 
       CREATE VIEW "1".user_details AS
@@ -79,7 +79,7 @@ class FixUserTotals < ActiveRecord::Migration
          FROM (public.users u
            LEFT JOIN "1".user_totals ut ON ((ut.user_id = u.id)));
 
-      grant select on "1".user_details to admin;
+      grant select on "1".user_details to admins;
       grant select on "1".user_details to web_user;
       grant select on "1".user_details to anonymous;
 
@@ -105,7 +105,7 @@ class FixUserTotals < ActiveRecord::Migration
            LEFT JOIN "1".user_totals ut ON ((ut.user_id = u.id)))
         WHERE ((public.was_confirmed(c.*) OR public.waiting_payment(pa.*)) AND ((NOT c.anonymous) OR public.is_owner_or_admin(p.user_id)));
 
-      grant select on "1".project_contributions to admin;
+      grant select on "1".project_contributions to admins;
       grant select on "1".project_contributions to web_user;
       grant select on "1".project_contributions to anonymous;
 
@@ -162,7 +162,7 @@ class FixUserTotals < ActiveRecord::Migration
         ORDER BY u.name;
 
       grant select on "1".team_members to anonymous;
-      grant select on "1".team_members to admin;
+      grant select on "1".team_members to admins;
       grant select on "1".team_members to web_user;
 
       CREATE VIEW "1".user_details AS
@@ -185,7 +185,7 @@ class FixUserTotals < ActiveRecord::Migration
          FROM (public.users u
            LEFT JOIN "1".user_totals ut ON ((ut.user_id = u.id)));
 
-      grant select on "1".user_details to admin;
+      grant select on "1".user_details to admins;
       grant select on "1".user_details to web_user;
       grant select on "1".user_details to anonymous;
 
@@ -211,7 +211,7 @@ class FixUserTotals < ActiveRecord::Migration
            LEFT JOIN "1".user_totals ut ON ((ut.user_id = u.id)))
         WHERE ((public.was_confirmed(c.*) OR public.waiting_payment(pa.*)) AND ((NOT c.anonymous) OR public.is_owner_or_admin(p.user_id)));
 
-      grant select on "1".project_contributions to admin;
+      grant select on "1".project_contributions to admins;
       grant select on "1".project_contributions to web_user;
       grant select on "1".project_contributions to anonymous;
     SQL

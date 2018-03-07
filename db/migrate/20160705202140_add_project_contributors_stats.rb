@@ -31,7 +31,7 @@ where
     (case when p.state = 'failed' then c.was_confirmed else c.is_confirmed end)
 group by p.id;
 
-grant select on "1".project_stat_contributors to web_user, anonymous, admin;
+grant select on "1".project_stat_contributors to web_user, anonymous, admins;
     }
   end
 

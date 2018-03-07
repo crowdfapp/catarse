@@ -19,7 +19,7 @@ class CreateNotificationsEndpoint < ActiveRecord::Migration
         SELECT user_id, template_name, created_at, sent_at, deliver_at FROM contribution_notifications
     ) n;
 
-    grant select on "1".notifications to admin;
+    grant select on "1".notifications to admins;
     SQL
   end
 end
