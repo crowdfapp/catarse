@@ -8,10 +8,7 @@ class CreateProjectsView < ActiveRecord::Migration
        STABLE
         AS $function$
           SELECT
-            'https://' || settings('aws_host')  ||
-            '/' || settings('aws_bucket') ||
-            '/uploads/project/uploaded_image/' || $1.id::text ||
-            '/project_thumb_' || size || '_' || $1.uploaded_image
+            'esbuenisimo_thumbnail'
       $function$;
 
       CREATE OR REPLACE VIEW "1".projects as

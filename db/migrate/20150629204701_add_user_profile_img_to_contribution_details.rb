@@ -3,10 +3,7 @@ class AddUserProfileImgToContributionDetails < ActiveRecord::Migration
     execute <<-SQL
     CREATE OR REPLACE FUNCTION public.profile_img_thumbnail(users) RETURNS text AS $$ 
     SELECT 
-      'https://' || (SELECT value FROM settings WHERE name = 'aws_host') || 
-      '/' || (SELECT value FROM settings WHERE name = 'aws_bucket') ||
-      '/uploads/user/uploaded_image/' || $1.id::text ||
-      '/thumb_avatar_' || $1.uploaded_image
+      'esbuenisimo_thumbnail'
     
     $$ LANGUAGE SQL STABLE;
 
