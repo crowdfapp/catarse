@@ -357,7 +357,6 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.9.3)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.0)
@@ -443,6 +442,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (3.11.4)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
     rack (1.5.3)
@@ -475,7 +475,6 @@ GEM
       activesupport (= 4.1.10)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.13.0)
     rake (10.4.2)
     ranked-model (0.4.0)
       activerecord (>= 3.1.12)
@@ -606,10 +605,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    unicorn (4.9.0)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     user_notifier (0.0.5)
       rails (>= 4.0.0)
       sidekiq
@@ -687,6 +682,7 @@ DEPENDENCIES
   postgres-copy
   protected_attributes
   pry
+  puma
   pundit
   rails (~> 4.1.6)
   rails-erd
@@ -713,7 +709,6 @@ DEPENDENCIES
   thin
   to_xls
   uglifier
-  unicorn
   user_notifier (~> 0.0.5)
   video_info (>= 1.1.1)
   weekdays
