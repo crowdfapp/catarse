@@ -85,9 +85,6 @@ Catarse::Application.configure do
   config.action_dispatch.default_headers = {
     'X-Frame-Options' => 'ALLOWALL'
   }
-  
+
   config.active_record.schema_format = :ruby
-  if Rails.env == 'production'
-    Rake::Task["db:structure:dump"].clear
-  end
 end
