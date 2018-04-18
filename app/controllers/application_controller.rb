@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   layout 'catarse_bootstrap'
-  protect_from_forgery
+  #protect_from_forgery
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
